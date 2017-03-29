@@ -1,0 +1,25 @@
+{
+  "name": "recommendationsystem",
+  "description": "CMPE 295B final year project",
+  "main": "app.js",
+  "authors": [
+    "tejasgujjar@gmail.com"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/tejasgujjar/RecommendationSystem",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-aria": "^1.6.3",
+    "angular-bootstrap": "^2.5.0",
+    "angular-messages": "^1.6.3",
+    "angular-route": "^1.6.3",
+    "angular-ui-router": "^0.4.2",
+    "moment": "^2.18.1"
+  }
+}
