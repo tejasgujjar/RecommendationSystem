@@ -3,6 +3,7 @@
 ## Front-end technologies
 * Angular JS, 
 * Bootstrap
+* nvD3
 
 ## Back-end technologies
 * Node JS
