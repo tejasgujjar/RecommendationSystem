@@ -18,3 +18,4 @@
 2. Run mongoDB $ mongod --dbpath \<path where you want to run the db\>
 Refer: http://mongodb.github.io/node-mongodb-native/2.2/quick-start/quick-start/
 
+- UI template https://github.com/start-angular/ani-theme/blob/master/README.md
