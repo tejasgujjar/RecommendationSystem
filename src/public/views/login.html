@@ -4,7 +4,7 @@ Inspired by http://dribbble.com/shots/917819-iPad-Calendar-Login?list=shots&sort
 <div class="login-page">
 	<div class="row">
 		<div class="col-md-4 col-lg-4 col-md-offset-4 col-lg-offset-4">
-        	<img src="images/flat-avatar.png" class="user-avatar" />
+        	<img src="public/stylesheets/images/plate.png" class="user-avatar" />
 			<h1>Recommend Me</h1>
 			<form role="form" ng-submit="submit()">
 
@@ -18,10 +18,9 @@ Inspired by http://dribbble.com/shots/917819-iPad-Calendar-Login?list=shots&sort
 					</div>
 				</div>
 
-				<button type="submit" class="btn btn-white btn-outline btn-lg btn-rounded">Login</button>
-
+				<button ng-click="login()" type="submit" class="btn btn-white btn-outline btn-lg btn-rounded">Login</button>
+				<button ng-click="signup()" type="submit" class="btn btn-white btn-outline btn-lg btn-rounded">Signup</button>
 			</form>
-
 		</div>
 	</div>
 

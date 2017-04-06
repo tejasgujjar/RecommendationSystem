@@ -37,41 +37,32 @@ angular.module("RecommendationSystem", [
         .state('overview', {
           url: '/overview',
           parent: 'dashboard',
-          templateUrl: 'public/views/dashboard/overview.html'
+          templateUrl: 'public/views/dashboard/overview.html',
+          controller: 'OverviewCtrl'
+
         })
         .state('reports', {
           url: '/reports',
           parent: 'dashboard',
           templateUrl: 'public/views/dashboard/reports.html'
+        })
+        .state('userprofile', {
+          url: '/userprofile',
+          parent: 'dashboard',
+          templateUrl: 'public/views/dashboard/userprofile.html'
+        })
+        .state('settings', {
+          url: '/settings',
+          parent: 'dashboard',
+          templateUrl: 'public/views/dashboard/settings.html'
         });
 
 })
 
 .controller('DashboardCtrl', function($scope, $state) {
-
   $scope.$state = $state;
-
-})
-
-.controller('LoginCtrl', function($scope, $location) {
-
-  $scope.submit = function() {
-
-    $location.path('/dashboard');
-
-    return false;
-  }
-
 });
-// .config(function ($routeProvider) {
-//
-//   $routeProvider
-//     .when('/', {
-//       templateUrl: 'public/templates/home.template.ejs',
-//       controller: 'HomeCtrl',
-//       controllerAs: 'home.controller'
-//     })
-// });
+
 
 
 console.log('loaded apps');

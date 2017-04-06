@@ -28,13 +28,12 @@ angular.module("RecommendationSystem")
 
       $scope.login_user = function(preference){
         console.log('show log in screen');
+        location.href = 'http://localhost:3000/#!/login';
         // save all user preferences to DB
         // show main page
 
       }
-
  });
-
 
 function show_error(msg){
   alert(msg);
