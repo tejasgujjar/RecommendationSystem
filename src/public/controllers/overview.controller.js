@@ -5,4 +5,8 @@ angular.module("RecommendationSystem")
 
   console.log('showing RecommendationSystem');
   $scope.print = 'loading from controller';
+  // $(".sidebar").hide();
+  // setTimeout(function(){
+  //   // $(".sidebar").show();
+  // },3000);
 });
