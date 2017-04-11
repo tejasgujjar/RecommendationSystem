@@ -19,3 +19,5 @@
 Refer: http://mongodb.github.io/node-mongodb-native/2.2/quick-start/quick-start/
 
 - UI template https://github.com/start-angular/ani-theme/blob/master/README.md
+
+* Created mongodb in local directory. DB name: recommendme_db

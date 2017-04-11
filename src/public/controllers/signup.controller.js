@@ -1,10 +1,12 @@
 console.log('loaded controller signup');
 angular.module("RecommendationSystem")
 
-.controller("SignUpCtrl", function ($scope) {
+.controller("SignUpCtrl", function ($scope, $http) {
       console.log('Signup controller testt controler');
       $scope.show_preferences = false;
       $scope.show_signup = true;
+
+
 
       $scope.done_signup = function(user){
         // if (user == undefined){
@@ -22,7 +24,23 @@ angular.module("RecommendationSystem")
             console.log("show preference page");
             $scope.show_preferences = true;
             $scope.show_signup = false;
+            var dataval = {
+				"email":$scope.emailsign,
+				"password":$scope.passwordsign
+		};
 
+		$http({
+			method : "POST",
+			url : '/api/signup',
+			data : dataval
+		}).success(function(data) {
+			console.log("signed up: "+data);
+			//checking the response data for statusCode
+
+		}).error(function(error) {
+			//write failure code
+			console.log("Error up: "+error);
+		});
         }
       }
 
