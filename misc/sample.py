@@ -54,7 +54,7 @@ GRANT_TYPE = 'client_credentials'
 
 # Defaults for our simple example.
 DEFAULT_TERM = ''
-DEFAULT_LOCATIONS = ['San Jose, CA','Santa Clara, CA','San Francisco, CA','Santa Clara, CA']
+DEFAULT_LOCATIONS = ['San Jose, CA','Santa Clara, CA','San Francisco, CA']
 SEARCH_LIMIT = 50
 
 
