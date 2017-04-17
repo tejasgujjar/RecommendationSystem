@@ -158,7 +158,7 @@ def query_api(term, location):
     client = MongoClient()
     db = client.recommendme_db  ##change db name
     resultdb = db.restaurants.insert_many([rest for rest in businesses])
-    print(resultdb.id)
+    #print(resultdb.id)
     print ("==================================================================")
     '''
     business_id = businesses[0]['id']
