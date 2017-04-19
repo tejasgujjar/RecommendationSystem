@@ -23,6 +23,11 @@ Refer: http://mongodb.github.io/node-mongodb-native/2.2/quick-start/quick-start/
 * Created mongodb in local directory. DB name: recommendme_db
 * Run misc/sample.py to update the DB with the restaurant dataset. 
 
+#### Twitter data
+1. Twitter account credentials
+* username: ravindranathtejas
+* password: twr2013
+
 #### Important links
 * Twitter text analysis: https://marcobonzanini.com/2015/03/09/mining-twitter-data-with-python-part-2/
 
@@ -31,3 +36,4 @@ Refer: http://mongodb.github.io/node-mongodb-native/2.2/quick-start/quick-start/
 * Sign in - sign up page (with db update) - Kushal
 * Backend request handling (Home page) and reviews update  - Tejas
 * Twitter data wrt restaurant and updating db - Ashwin
+
