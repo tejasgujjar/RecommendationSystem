@@ -23,6 +23,9 @@ Refer: http://mongodb.github.io/node-mongodb-native/2.2/quick-start/quick-start/
 * Created mongodb in local directory. DB name: recommendme_db
 * Run misc/sample.py to update the DB with the restaurant dataset. 
 
+#### Important links
+* Twitter text analysis: https://marcobonzanini.com/2015/03/09/mining-twitter-data-with-python-part-2/
+
 #### To-Do
 * Recommendation engine setup - Yashas
 * Sign in - sign up page (with db update) - Kushal
