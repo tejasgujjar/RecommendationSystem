@@ -35,5 +35,5 @@ Refer: http://mongodb.github.io/node-mongodb-native/2.2/quick-start/quick-start/
 * Recommendation engine setup - Yashas
 * Sign in - sign up page (with db update) - Kushal
 * Backend request handling (Home page) and reviews update  - Tejas
-* Twitter data wrt restaurant and updating db - Ashwin
+* Twitter data wrt restaurant and updating db - Tejas
 
