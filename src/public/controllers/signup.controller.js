@@ -34,13 +34,12 @@ angular.module("RecommendationSystem")
                   "password":$scope.passwordsign,
                   "firstname":$scope.firstname,
                   "lastname":$scope.lastname,
-                  "address":$scope.address,
-                  "Zipcode":$scope.zipcode,
+                  "streetName":$scope.streetName,
+                  "zipcode":$scope.zipcode,
                   "cuisine":$scope.cuisine,
                   "state":$scope.state,
                   "contactnumber":$scope.contactnumber
               };
-              console.log($scope.address);
               console.log($scope.zipcode);
               console.log($scope.cuisine);
               console.log($scope.state);
@@ -50,11 +49,11 @@ angular.module("RecommendationSystem")
               console.log($scope.passwordsign);
               console.log($scope.firstname);
               console.log($scope.lastname);
-              console.log($scope.address);
+              console.log($scope.streetName);
               
               $http({
               method : "POST",
-              url : '/api/addressDetails',
+              url : '/api/signup',
               data : dataval
             }).success(function(data) {
               console.log("signed up: "+data);
