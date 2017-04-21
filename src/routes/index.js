@@ -8,28 +8,24 @@ router.get('/signup', function(req, res, next) {
   console.log('Requested signup page');
   res.render('signup', { title: 'Restaurant Recommendation System' });
 });
-
 router.post('/api/signup', function(req, res) {
-  console.log('Requested signup data node');
+  console.log('---------------------------------------------------\n'); //please maintain this order while logging
+  console.log('Request email comming in ' +req.body.email);
+  console.log('Request password comming in ' +req.body.password);
+  console.log('Request firstname comming in ' +req.body.firstname);
+  console.log('Request lastname comming in ' +req.body.lastname);
+  console.log('---------------------------------------------------\n'); //please maintain this order while logging
   mongoconn.connect(function(_connection){
-
-  		//console.log("OHhhhhhhhhhhhhhhhh",_connection);
-  		var userdata = _connection.collection('userdata');
-      userdata.insert({"email":'testemail',"password":'pass',"firstname":'tejas'});
-
-      console.log('Got result from DB');
-      result = {"condition":"success"};
-
-
-      console.log('Going to release DB connection to the Pool');
-
-      res
-      .status(200)
-      .json(result);
-      return;
-
-  	});
-
+    var userdata = _connection.collection('userdata');
+   // userdata.insert({"email":req.body.email,"password":req.body.password,"firstname":req.body.firstname,'lastname':req.body.lastname});
+    console.log('Got result from DB');
+    result = {"condition":"success"};
+    console.log('Going to release DB connection to the Pool');
+    res
+    .status(200)
+    .json(result);
+    return;
+  });
 });
 
 router.get('/', function(req, res, next) {
@@ -61,24 +57,24 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
       
       var range = 16100; //10 miles
       if(result.length != 0){
-          for(var index in result){
-              for (var objIndex in result[index].categories){                
-                if(result[index].categories[objIndex]['alias'] == req.query['category']){                  
-                  var dist = geolib.getDistance(
-                    {latitude: Number(req.query['latitude']), longitude: Number(req.query['longitude'])},
-                    {latitude: Number(result[index].coordinates['latitude']), longitude: Number(result[index].coordinates['longitude'])}
-                  );
-                    console.log("Distance is:"+dist);
-                    if(dist <= range){
-                      output.push(result[index]);
-                        console.log("Within range...........");
-                    }
-                  break;
-                }
+        for(var index in result){
+          for (var objIndex in result[index].categories){                
+            if(result[index].categories[objIndex]['alias'] == req.query['category']){                  
+              var dist = geolib.getDistance(
+                {latitude: Number(req.query['latitude']), longitude: Number(req.query['longitude'])},
+                {latitude: Number(result[index].coordinates['latitude']), longitude: Number(result[index].coordinates['longitude'])}
+                );
+              console.log("Distance is:"+dist);
+              if(dist <= range){
+                output.push(result[index]);
+                console.log("Within range...........");
               }
-
+              break;
+            }
           }
-      
+
+        }
+
 
       }
 
