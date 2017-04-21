@@ -15,7 +15,7 @@ public_tweets = api.home_timeline()
 #     print "-----------------------------------------------------------------------------------"
 #     print tweet.text
 
-cricTweet = tweepy.Cursor(api.search, q='restaurant').items()
+cricTweet = tweepy.Cursor(api.search, q='ipl').items()
 for tweet in cricTweet:
     print "=================================================================================="
     print "Created at: ",tweet.created_at
