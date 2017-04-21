@@ -14,8 +14,8 @@ router.post('/api/signup', function(req, res) {
   console.log('Request password comming in ' +req.body.password);
   console.log('Request firstname comming in ' +req.body.firstname);
   console.log('Request lastname comming in ' +req.body.lastname);
-  console.log('Request address comming in ' +req.body.address);
-  console.log('Request zipcode comming in ' +req.body.Zipcode);
+  console.log('Request streetName comming in ' +req.body.streetName);
+  console.log('Request zipcode comming in ' +req.body.zipcode);
   console.log('Request cuisine comming in ' +req.body.cuisine);
   console.log('Request state comming in ' +req.body.state);
   console.log('Request contactnumber comming in ' +req.body.contactnumber);
@@ -27,7 +27,7 @@ router.post('/api/signup', function(req, res) {
       "password":req.body.password,
       "firstname":req.body.firstname,
       'lastname':req.body.lastname,
-      "address": req.body.address,
+      "streetName": req.body.streetName,
       "zipcode": req.body.zipcode,
       "cuisine":req.body.cuisine,
       "state":req.body.state,
