@@ -1,7 +1,6 @@
 'use strict';
 angular.module("RecommendationSystem", [
   'ui.router',
-
   'ngMaterial',
   // 'ngAnimate',
  // 'ngCookies',
