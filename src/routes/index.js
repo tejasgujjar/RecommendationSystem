@@ -14,10 +14,25 @@ router.post('/api/signup', function(req, res) {
   console.log('Request password comming in ' +req.body.password);
   console.log('Request firstname comming in ' +req.body.firstname);
   console.log('Request lastname comming in ' +req.body.lastname);
+  console.log('Request address comming in ' +req.body.address);
+  console.log('Request zipcode comming in ' +req.body.Zipcode);
+  console.log('Request cuisine comming in ' +req.body.cuisine);
+  console.log('Request state comming in ' +req.body.state);
+  console.log('Request contactnumber comming in ' +req.body.contactnumber);
   console.log('---------------------------------------------------\n'); //please maintain this order while logging
   mongoconn.connect(function(_connection){
     var userdata = _connection.collection('userdata');
-   // userdata.insert({"email":req.body.email,"password":req.body.password,"firstname":req.body.firstname,'lastname':req.body.lastname});
+    userdata.insert({
+      "email":req.body.email,
+      "password":req.body.password,
+      "firstname":req.body.firstname,
+      'lastname':req.body.lastname,
+      "address": req.body.address,
+      "zipcode": req.body.zipcode,
+      "cuisine":req.body.cuisine,
+      "state":req.body.state,
+      "contactnumber":req.body.contactnumber
+  });
     console.log('Got result from DB');
     result = {"condition":"success"};
     console.log('Going to release DB connection to the Pool');

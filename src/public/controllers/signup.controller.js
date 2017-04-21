@@ -54,7 +54,7 @@ angular.module("RecommendationSystem")
               
               $http({
               method : "POST",
-              url : '/api/addressDetails',
+              url : '/api/signup',
               data : dataval
             }).success(function(data) {
               console.log("signed up: "+data);
