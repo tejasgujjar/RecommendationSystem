@@ -30,6 +30,7 @@ Refer: http://mongodb.github.io/node-mongodb-native/2.2/quick-start/quick-start/
 
 #### Important links
 * Twitter text analysis: https://marcobonzanini.com/2015/03/09/mining-twitter-data-with-python-part-2/
+* Join the slack channel https://recommendme-group.slack.com
 
 #### To-Do
 * Recommendation engine setup - Yashas
