@@ -9,7 +9,8 @@ angular.module("RecommendationSystem", [
  // 'ngRoute',
  // 'ngSanitize',
  // 'ngTouch',
- 'ngMessages'
+ 'ngMessages',
+ 'ngRateIt'
 ])
 .config(function($stateProvider, $urlRouterProvider) {
 

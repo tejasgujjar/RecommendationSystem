@@ -74,13 +74,16 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
       if(result.length != 0){
         for(var index in result){
           for (var objIndex in result[index].categories){                
-            if(result[index].categories[objIndex]['alias'] == req.query['category']){                  
+            //if(result[index].categories[objIndex]['alias'] == req.query['category']){                  
+              if(result[index].categories[objIndex]['alias'] == "mexican"){//should replace  with session data                  
               var dist = geolib.getDistance(
-                {latitude: Number(req.query['latitude']), longitude: Number(req.query['longitude'])},
+                //{latitude: Number(req.query['latitude']), longitude: Number(req.query['longitude'])},
+                {latitude: Number(37.3412530), longitude: Number(-121.8949750)}, //should replace  with session data
                 {latitude: Number(result[index].coordinates['latitude']), longitude: Number(result[index].coordinates['longitude'])}
                 );
               console.log("Distance is:"+dist);
               if(dist <= range){
+                console.log(result[index]);
                 output.push(result[index]);
                 console.log("Within range...........");
               }

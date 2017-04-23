@@ -27,6 +27,7 @@
     "angular-touch": "^1.6.3",
     "angular-resource": "^1.6.3",
     "angular-sanitize": "^1.6.3",
-    "angular-mocks": "^1.6.4"
+    "angular-mocks": "^1.6.4",
+    "angular-rateit": "^3.0.2"
   }
 }
