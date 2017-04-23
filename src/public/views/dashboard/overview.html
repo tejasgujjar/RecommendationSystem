@@ -10,9 +10,10 @@
 						<img src="public/stylesheets/images/restaurant-icon.png" alt="restaurant-icon">
 					</div>
 					<div class="title-block">
-						<h3>Pista House, <small>Milpitas</small></h3>
-						<small>445 Emerson Street, Milpitas, CA 94301</small>
+						<h3>{{rest.name}}, <small>{{rest.location.city}}</small></h3>
+						<small>{{rest.location.display_address[0]}}</small>
 						<p>Rating image</p>
+						<ng-rate-it ng-model="rest.rating"></ng-rate-it>
 						<!-- <button type="button" class="btn btn-primary btn-outline" name="button">View Menu</button> -->
 					</div>
 				</div>
