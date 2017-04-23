@@ -4,7 +4,7 @@
 	<div class="jumbotron outer-container">
 		<div class="container test">
 
-			<div class="restaurant-div">
+			<div class="restaurant-div" ng-repeat="rest in restaurants">
 				<div class="first-block">
 					<div class="thumbnail-block">
 						<img src="public/stylesheets/images/restaurant-icon.png" alt="restaurant-icon">
@@ -16,14 +16,14 @@
 						<!-- <button type="button" class="btn btn-primary btn-outline" name="button">View Menu</button> -->
 					</div>
 				</div>
-				<div class="second-block">
-					<!-- <p>Reviews: </p> -->
+				<!-- <div class="second-block">
+				
 					<button type="button" class="btn btn-primary btn-outline" name="button">Like</button>
 					<button type="button" class="btn btn-primary btn-outline" name="button">Dislike</button>
-				</div>
+				</div> -->
 			</div>
 
-			<div class="restaurant-div">
+			<!-- <div class="restaurant-div">
 				<div class="first-block">
 					<div class="thumbnail-block">
 						<img src="public/stylesheets/images/restaurant-icon-2.png" alt="restaurant-icon">
@@ -31,17 +31,10 @@
 					<div class="title-block">
 						<h3>Pista House, <small>Milpitas</small></h3>
 						<small>445 Emerson Street, Milpitas, CA 94301</small>
-						<p>Rating image</p>
-						<!-- <button type="button" class="btn btn-primary btn-outline" name="button">View Menu</button> -->
+						<p>Rating image</p>					
 					</div>
 				</div>
-				<div class="second-block">
-					<!-- <p>Reviews: </p> -->
-
-					<button type="button" class="btn btn-primary btn-outline" name="button">Like</button>
-					<button type="button" class="btn btn-primary btn-outline" name="button">Dislike</button>
-				</div>
-			</div>
+			</div> -->
 
 			<p>{{print}}</p>
 
