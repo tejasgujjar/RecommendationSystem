@@ -10,7 +10,7 @@ documentation.
 This program requires the Python requests library, which you can install via:
 `pip install -r requirements.txt`.
 Sample usage of the program:
-`python sample.py --term="bars" --location="San Francisco, CA"`
+`python sample.py --term="bars" --location="San Francisco, C    A"`
 """
 from __future__ import print_function
 from pymongo import MongoClient
@@ -21,7 +21,7 @@ import pprint
 import requests
 import sys
 import urllib
-
+count = 1
 
 # This client code can run on Python 2.x or 3.x.  Your imports can be
 # simpler if you only need one of those.
@@ -54,7 +54,8 @@ GRANT_TYPE = 'client_credentials'
 
 # Defaults for our simple example.
 DEFAULT_TERM = ''
-DEFAULT_LOCATIONS = ['San Jose, CA','Santa Clara, CA','San Francisco, CA']
+DEFAULT_LOCATIONS = ['San Jose, CA','Santa Clara, CA','San Francisco, CA','Fremont, CA','Sunnyvale, CA','Palo Alto, CA', 'Mountain View, CA','San Mateo, CA','Menlo Park, CA']
+
 SEARCH_LIMIT = 50
 
 
@@ -155,9 +156,23 @@ def query_api(term, location):
         print(u'No businesses for {0} in {1} found.'.format(term, location))
         return
     print (businesses)
+    '''
     client = MongoClient()
     db = client.recommendme_db  ##change db name
-    resultdb = db.restaurants.insert_many([rest for rest in businesses])
+    '''
+
+    connection = MongoClient("ds117311.mlab.com", 17311)
+    db = connection['restreco']
+    db.authenticate("restUser", "restUser123#")
+    global count
+    for index in xrange(0,len(businesses)):
+        businesses[index]['id'] = count
+        print (businesses[index]['id'])
+
+        count += 1
+
+
+    resultdb = db.restaurants_dump.insert_many([rest for rest in businesses])
     #print(resultdb.id)
     print ("==================================================================")
     '''
