@@ -4,10 +4,12 @@ var mongoconn = require('./mongodb');//mongo
 var geolib = require('geolib');
 
 /* GET home page. */
+
 router.get('/signup', function(req, res, next) {
   console.log('Requested signup page');
   res.render('signup', { title: 'Restaurant Recommendation System' });
 });
+
 router.post('/api/signup', function(req, res) {
   console.log('---------------------------------------------------\n'); //please maintain this order while logging
   console.log('Request email comming in ' +req.body.email);
