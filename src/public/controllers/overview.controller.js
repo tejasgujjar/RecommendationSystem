@@ -4,7 +4,7 @@ angular.module("RecommendationSystem")
 .controller('OverviewCtrl', function($scope, $location,$http) {
 
   console.log('showing RecommendationSystem');
-  $scope.print = 'loading from controller';
+  
   // $(".sidebar").hide();
   // setTimeout(function(){
   //   // $(".sidebar").show();

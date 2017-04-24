@@ -1,44 +1,46 @@
 <div>
 	<a ui-sref="reports" class="pull-right btn btn-primary btn-outline btn-rounded">Map View</a>
-	<h3>Here are your current recommendations...</h3>
-	<div class="jumbotron outer-container">
-		<div class="container test">
-
-			<div class="restaurant-div" ng-repeat="rest in restaurants">
-				<div class="first-block">
-					<div class="thumbnail-block">
-						<img src="public/stylesheets/images/restaurant-icon.png" alt="restaurant-icon">
-					</div>
-					<div class="title-block">
-						<h3>{{rest.name}}, <small>{{rest.location.city}}</small></h3>
-						<small>{{rest.location.display_address[0]}}</small>
-						<p>Rating image</p>
-						<ng-rate-it ng-model="rest.rating"></ng-rate-it>
-						<!-- <button type="button" class="btn btn-primary btn-outline" name="button">View Menu</button> -->
-					</div>
-				</div>
-				<!-- <div class="second-block">
-				
-					<button type="button" class="btn btn-primary btn-outline" name="button">Like</button>
-					<button type="button" class="btn btn-primary btn-outline" name="button">Dislike</button>
-				</div> -->
-			</div>
-
-			<!-- <div class="restaurant-div">
-				<div class="first-block">
-					<div class="thumbnail-block">
-						<img src="public/stylesheets/images/restaurant-icon-2.png" alt="restaurant-icon">
-					</div>
-					<div class="title-block">
-						<h3>Pista House, <small>Milpitas</small></h3>
-						<small>445 Emerson Street, Milpitas, CA 94301</small>
-						<p>Rating image</p>					
+	<h3>Here are your current recommendations</h3>
+	<div class="container-fluid"><!-- Added for additional changes -->
+		<div class="row"><!-- Added for additional changes -->
+			<div class="col-md-8"><!-- Added for additional changes -->
+				<div class="jumbotron outer-container">
+					<div class="container test">
+						<div class="restaurant-div" ng-repeat="rest in restaurants">
+							<div class="first-block">
+								<div class="thumbnail-block">
+									<img src="public/stylesheets/images/restaurant-icon.png" alt="restaurant-icon">
+								</div>
+								<div class="title-block">
+									<h3>{{rest.name}}, <small>{{rest.location.city}}</small></h3>
+									<small>{{rest.location.display_address[0]}}</small>						
+									<ng-rate-it ng-model="rest.rating"></ng-rate-it>
+									
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div> -->
-
-			<p>{{print}}</p>
-
-		</div>
-	</div>
+			</div><!-- Added for additional changes -->
+			<div class="col-md-4"><!-- Added for additional changes -->
+				<div class="jumbotron outer-container">
+					<div class="container test">
+						<div class="restaurant-div" ng-repeat="rest in restaurants">
+							<div class="first-block">
+								<div class="thumbnail-block">
+									<img src="public/stylesheets/images/restaurant-icon-2.png" alt="restaurant-icon">
+								</div>
+								<div class="title-block">
+									<h4>{{rest.name}}, <small>{{rest.location.city}}</small></h>
+									<!-- <small>{{rest.location.display_address[0]}}</small> -->						
+									<ng-rate-it ng-model="rest.rating"></ng-rate-it>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- Added for additional changes -->
+		</div><!-- Added for additional changes -->
+	</div><!-- Added for additional changes -->
 </div>
