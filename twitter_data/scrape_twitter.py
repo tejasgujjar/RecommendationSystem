@@ -1,4 +1,70 @@
 import tweepy
+from tweepy import Stream
+from tweepy.streaming import StreamListener
+import re
+from tweepy import OAuthHandler
+from textblob import TextBlob
+import sys
+import json
+
+# list of restaurant from the db
+LOOKUP_KEYWORDS = ['pistahouse', 'inchinbamboo'] # to be taken from the mongo DB
+
+class AnalyzeTweet():
+    def clean_tweet(self, tweet):
+        '''
+        Utility function to clean tweet text by removing links, special characters
+        using simple regex statements.
+        '''
+        return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)", " ", tweet).split())
+
+    def get_tweet_sentiment(self, tweet):
+        '''
+        Utility function to classify sentiment of passed tweet
+        using textblob's sentiment method
+        '''
+        # create TextBlob object of passed tweet text
+        analysis = TextBlob(self.clean_tweet(tweet))
+        # set sentiment
+        if analysis.sentiment.polarity > 0:
+            return 'positive'
+        elif analysis.sentiment.polarity == 0:
+            return 'neutral'
+        else:
+            return 'negative'
+
+# tweet_analyzer = AnalyzeTweet()
+# input_text = "This restaurant sucks so much!!! I dont have words to describe! #pistahouse"
+# print("Input:"+input_text+"\nSentiment:"+tweet_analyzer.get_tweet_sentiment(input_text))
+# sys.exit()
+
+class MyListener(StreamListener):
+    def on_data(self, data):
+        try:
+            with open('twitter_data.json', 'a') as f:
+                f.write(data)
+                tweet_obj = json.loads(data)
+                tweet = tweet_obj['text']
+                print("NEW TWEET: "+str(tweet))
+                sentiment = tweet_analyzer.get_tweet_sentiment(tweet)
+                restaurant = ""
+                print("Sentiment: "+sentiment)
+                # get restaurant name from the text
+                for rest in LOOKUP_KEYWORDS:
+                    if rest in tweet:
+                        restaurant = rest
+                print("Restaurant: "+restaurant)
+                #update db
+                #tweet_analyzer.update_db(sentiment)
+                return True
+        except BaseException as e:
+            print("Error on_data: " % str(e))
+        return True
+
+    def on_error(self, status):
+        print("Error in streaming!!")
+        print(status)
+        return True
 
 consumer_key = "KYS0m11ML0WWuftNvjdaKF7iR"
 consumer_secret = "hKszS7x6pmkblS4iIa6Z5UkNpogucRK45T81T5DRoStmxn2a6y"
@@ -7,14 +73,16 @@ access_token_secret = "SKtdtX1856iCTWk1UVARjLT3ObR3OGvnuIAiVHiv6U7uT"
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
-
 api = tweepy.API(auth)
+tweet_analyzer = AnalyzeTweet()
 
+twitter_stream = Stream(auth, MyListener())
+twitter_stream.filter(track=LOOKUP_KEYWORDS)
+# scripts starts listening to the global tweet at this point
+
+
+# Below code to print the tweet matching the desired keyword.
 public_tweets = api.home_timeline()
-# for tweet in public_tweets:
-#     print "-----------------------------------------------------------------------------------"
-#     print tweet.text
-
 cricTweet = tweepy.Cursor(api.search, q='ipl').items()
 for tweet in cricTweet:
     print "=================================================================================="
