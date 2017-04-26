@@ -7,7 +7,16 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-require('./routes/mongodb.js').createrconnectionpool();
+var restdb = require('./api/rest');
+
+var mongoose = require('mongoose');
+var mongourl = 'mongodb://restUser:restUser123#@ds117311.mlab.com:17311/restreco'
+mongoose.Promise = global.Promise;
+
+mongoose.connect(mongourl, function(err) {
+    if (err) throw err;
+    console.log("Successfully Connected to cloud mongodb");
+});
 
 var app = express();
 
@@ -27,7 +36,8 @@ app.use(express.static(path.join(__dirname, '/')));
 
 app.use('/', index);
 app.use('/users', users);
-
+app.use('/api/rest', restdb);
+app.use('/api/user', restdb);
 
 
 // catch 404 and forward to error handler
