@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test Page</title>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+    <style>
+
+    	.master-video-wrapper {
+		    overflow: hidden;
+		    position: relative;
+		    background-image: url(https://www.highcharts.com /joomla/media/mod_highsoft_slider/images/bg-fallback-optim.jpg);
+		    background-size: cover;
+		    background-position: center;
+		}
+
+    	.master-video{
+    		height:auto;
+    		width : 100%;
+    		position: absolute;
+    		top:50%;
+    		left:50%;
+    		transform : translate(-50%,-50%);
+    		vertical-align: baseline;
+    	}
+
+    	.master-body{
+    		position: absolute;
+		    width: 100%;
+		    text-align: center;
+		    height: 120px;
+		    line-height: 1;
+		    top: 0;
+		    bottom: 0;
+		    margin: auto;
+		    color: #fff;
+    	}
+
+    	.master-title {
+		    font-size: 50px;
+		    font-weight: 500;
+		    margin-top: 10px;
+		}
+
+		.master-sub-title {
+		    margin: 20px 0 50px 0;
+		    font-size: 20px;
+		    color: rgba(255, 255, 255, 0.8);
+		    line-height: 1.5;
+		}
+
+		.custom{
+			height: 600px;
+		}
+    </style>
+  </head>
+  <body>
+    <div>
+      	<div class="custom">
+      		<div class="master-video-wrapper" style="height:100%">
+		        <video autoplay="autoplay" class="master-video" loop="loop" width="320px" height="240px">
+		          <source src="/stylesheets/videos/bg.mp4" type="video/mp4">
+		       </video>
+		       <div class="master-body col-md-10 col-sm-11 col-xs-12" style="opacity: 0.99; filter: blur(0.111111px); transform: translateY(1.42857%);">
+			   		<!-- <div class="master-logo"><img src="https://www.highcharts.com/joomla/media/templates/highsoft_2015/images/logo.svg" border="0"></div> -->
+			   		<div class="master-title">Restaurant Recommendation System</div>
+			   		<div class="master-sub-title">RecommendMe makes it easy for users to get</div>
+		       </div>
+		       <!-- <div class="master-title">Test title</div> -->
+		       <div class="master-sub-title">test sub title</div>
+	       </div>
+   		</div>
+    </div>
+  </body>
+</html>
