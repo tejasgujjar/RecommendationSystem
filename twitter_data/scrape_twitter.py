@@ -26,6 +26,7 @@ class AnalyzeTweet():
         # create TextBlob object of passed tweet text
         analysis = TextBlob(self.clean_tweet(tweet))
         # set sentiment
+        print("Polarity:"+str(analysis.sentiment.polarity))
         if analysis.sentiment.polarity > 0:
             return 'positive'
         elif analysis.sentiment.polarity == 0:
@@ -33,10 +34,11 @@ class AnalyzeTweet():
         else:
             return 'negative'
 
-# tweet_analyzer = AnalyzeTweet()
-# input_text = "This restaurant sucks so much!!! I dont have words to describe! #pistahouse"
-# print("Input:"+input_text+"\nSentiment:"+tweet_analyzer.get_tweet_sentiment(input_text))
-# sys.exit()
+tweet_analyzer = AnalyzeTweet()
+input_text = "This restaurant #pistahouse"
+#input_text = ""
+print("Input:"+input_text+"\nSentiment:"+tweet_analyzer.get_tweet_sentiment(input_text))
+sys.exit()
 
 class MyListener(StreamListener):
     def on_data(self, data):
