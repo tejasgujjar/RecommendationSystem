@@ -28,9 +28,7 @@
       <div class="">
         <img style="width:140px;height:120px;" src="public/stylesheets/images/plate.png">
         <h1 style="  font-family: fantasy;"><%= title %></h1>
-
       </div>
-
     </header>
     <p style="color:grey;text-align:center;  font-family: fantasy;">Welcome to <%= title %></p>
     <div ng-controller='SignUpCtrl' class="container">
@@ -38,7 +36,7 @@
      <div id="signup" ng-show="show_signup">
       <div class="signup-screen">
        <div class="space-bot text-center">
-        <h1 style="  font-family: fantasy;">Sign up</h1>
+        <h1 class="myFont">Sign up</h1>
         <div class="divider"></div>
       </div>
       <md-input-container class="md-block">
@@ -55,7 +53,7 @@
     </md-input-container>
     <md-input-container class="md-block">
       <label>Email</label>
-      <input ng-model="emailsign">
+      <input type="email" ng-model="emailsign">
     </md-input-container>
       <div class="space-top text-center">
        <md-button ng-click="done_signup(user)" class="md-raised md-primary">Done</md-button>
