@@ -1,3 +1,4 @@
+/*@import url(https://fonts.googleapis.com/css?family=Sevillana);*/
 html {
   height: 120% !important;
 }
@@ -6,6 +7,7 @@ body {
   /*padding: 50px;*/
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   /*background-color: red;*/
+  /*font-family: 'Sevillana', cursive;*/
 }
 
 a {
@@ -13,7 +15,8 @@ a {
 }
 body {
     min-height:100%;
-    background-color: #263238;
+    /*background-color: #263238;*/
+    background: url(images/restaurant.jpeg); 
 }
 
 .text-center{
@@ -55,9 +58,18 @@ h1 {
 	  padding: 20px;
     padding-bottom: 40px;
     border-radius: 5px;
-    background-color: #a3c1ad;
+    /*background-color: #a3c1ad;*/
+    background-color: white;
     box-shadow: 0 1px 6px rgba(0,0,0,.3);
     color: white;
+    border:3px solid black;
+}
+.signup-screen:hover{
+    border:3px solid red;
+}
+
+.myFont {
+  color: black;
 }
 
 .btn{

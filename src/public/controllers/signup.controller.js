@@ -57,6 +57,7 @@ angular.module("RecommendationSystem")
               data : dataval
             }).success(function(data) {
               console.log("signed up: "+data);
+              location.href = 'http://localhost:3000/#!/dashboard/overview';
             }).error(function(error) {
               console.log("Error up: "+error);
           });
