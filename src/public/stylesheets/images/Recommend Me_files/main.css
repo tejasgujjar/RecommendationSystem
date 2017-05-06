@@ -45,8 +45,8 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
   overflow: hidden;
   position: relative;
   background-image: url('images/header-bg.png');
-  /*background-size: cover;
-  background-position: center;*/
+  background-size: cover;
+  background-position: center;
 }
 
 .master-video{
