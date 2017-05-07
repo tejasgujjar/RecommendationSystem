@@ -10,10 +10,13 @@ router.get('/signup', function(req, res, next) {
   res.render('signup', { title: 'Restaurant Recommendation System' });
 });
 router.get('/new-ui', function(req, res, next) {
-  console.log('Requested signup page');
+  console.log('Requested new landing page');
   res.render('index', { title: 'Restaurant Recommendation System' });
 });
-
+router.get('/home', function(req, res, next) {
+  console.log('Requested home page');
+  res.render('home-new', { title: 'Restaurant Recommendation System' });
+});
 router.get('/new', function(req, res, next) {
   console.log('Requested new sign in page');
   res.render('new_signin', { title: 'Restaurant Recommendation System' });
