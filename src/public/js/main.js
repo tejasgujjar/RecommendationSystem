@@ -3,7 +3,12 @@
 // This is The Scripts used for ___________ Theme
 //
 //
-var USER_SIGNUP_INFO = ""
+var USER_SIGNUP_INFO = null;
+var HOST = "http://localhost";
+var PORT = "3000"
+var URL = HOST + ":" + PORT;
+console.log("Application URL: "+URL);
+
 
 function main() {
 
@@ -109,7 +114,7 @@ function main() {
         $('#loginModal').modal('hide');
       });
       $('#login-btn').click(function(){
-        window.location = "./home.html";
+        window.location.href = URL + "/home";
       });
       $('#btnDialog').click(function(){
         BootstrapDialog.alert('Loaded home page!');
@@ -153,7 +158,7 @@ function main() {
 
     function register_user(data){
         // ajax request to save user info
-        
+
     }
 
   	/*====================================
