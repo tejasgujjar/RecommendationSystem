@@ -13,6 +13,8 @@ var mongoose = require('mongoose');
 var mongourl = 'mongodb://restUser:restUser123#@ds117311.mlab.com:17311/restreco'
 mongoose.Promise = global.Promise;
 
+require('./routes/mongodb.js').createrconnectionpool(); //added external mongo connection temporarily
+
 mongoose.connect(mongourl, function(err) {
     if (err) throw err;
     console.log("Successfully Connected to cloud mongodb");
