@@ -9,6 +9,10 @@ router.get('/signup', function(req, res, next) {
   console.log('Requested signup page');
   res.render('signup', { title: 'Restaurant Recommendation System' });
 });
+router.get('/new-ui', function(req, res, next) {
+  console.log('Requested signup page');
+  res.render('index', { title: 'Restaurant Recommendation System' });
+});
 
 router.get('/new', function(req, res, next) {
   console.log('Requested new sign in page');
