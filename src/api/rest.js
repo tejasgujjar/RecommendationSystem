@@ -166,6 +166,7 @@ router.post('/signupuser', function(req, res, next) {
 	console.log("/signupuser");
 	var query_obj = JSON.parse(req.query.USER_SIGNUP_INFO);
 
+	req.session.username = "yashas";
 
 	user.findOne({ "user_email": query_obj.email}, function (err, document){
 
