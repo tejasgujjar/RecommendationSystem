@@ -180,14 +180,12 @@ router.post('/signupuser', function(req, res, next) {
 
 
 		if(document == null){
-
-
 			var userInstance = new user({
 				user_firstname: query_obj.firstname,
 				user_lastname: query_obj.lastname,
 				user_email: query_obj.email,
 				user_password: query_obj.password,
-				//user_cuisine : req.query.USER_SIGNUP_INFO.cuisine,
+				user_cuisine : req.query.cuisine,
 				user_streetName : query_obj.streetname,
 				user_state : query_obj.state,
 				user_city : query_obj.city,
@@ -225,7 +223,11 @@ router.post('/signupuser', function(req, res, next) {
 
 router.get('/getSuccess', function(req, res, next) {
 	console.log("/getSuccess");
-	res.send({"status":200});
+	setTimeout(function(){
+		console.log("succsss");
+		res.send({"status":200});
+	},3000);
+
 });
 
 module.exports = router;
