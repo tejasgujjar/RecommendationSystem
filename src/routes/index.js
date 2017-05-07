@@ -10,6 +10,11 @@ router.get('/signup', function(req, res, next) {
   res.render('signup', { title: 'Restaurant Recommendation System' });
 });
 
+router.get('/new', function(req, res, next) {
+  console.log('Requested new sign in page');
+  res.render('new_signin', { title: 'Restaurant Recommendation System' });
+});
+
 router.post('/api/signup', function(req, res) {
   console.log('---------------------------------------------------\n'); //please maintain this order while logging
   console.log('Request email comming in ' +req.body.email);
@@ -67,17 +72,18 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
         console.log(err);
         res
         .status(200)
-        .json({"status":"failed"});        
+        .json({"status":"failed"});
       }
       var output = [];
       console.log(result.length);
-      
+
       var range = 16100; //10 miles
       if(result.length != 0){
         for(var index in result){
-          for (var objIndex in result[index].categories){                
-            //if(result[index].categories[objIndex]['alias'] == req.query['category']){                  
-              if(result[index].categories[objIndex]['alias'] == "mexican"){//should replace  with session data                  
+
+          for (var objIndex in result[index].categories){
+            if(result[index].categories[objIndex]['alias'] == req.query['category']){
+
               var dist = geolib.getDistance(
                 //{latitude: Number(req.query['latitude']), longitude: Number(req.query['longitude'])},
                 {latitude: Number(37.3412530), longitude: Number(-121.8949750)}, //should replace  with session data
@@ -98,7 +104,7 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
 
       }
 
-      
+
       res
       .status(200)
       .json(output);
