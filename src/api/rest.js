@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var restaurant = require('../schema/restaurantModel');
+var restaurant_data = require('../schema/restaurantDataModel');
 var user = require('../schema/userModel');
 
 //RESTAURANT RELATED DATABASE CALLS
@@ -92,6 +93,74 @@ router.get('/getUser', function(req, res, next) {
 		res.send(document);
 	});
 });
+
+
+router.get('/getRestaurantsForProfile',function(req,res){
+  console.log("inside getRestaurantsForProfile");
+  //console.log(req.query);
+  console.log("+==================================+++");
+
+  restaurant_data.find({}, function (err, document) {
+  		console.log(Object.keys(document).length);
+
+		res.send(document);
+	});
+
+  /*mongoconn.connect(function(_connection){
+    //lat = 37.3412530
+    //long = -121.8949750
+    //http://localhost:3000/api/getRestaurantsForProfile?name=yashas&category=mexican&latitude=37.3412530&longitude=-121.8949750
+    var restaurants = _connection.collection('restaurants');
+    restaurants
+    .find()
+    .toArray(function(err,result){
+      if(err){
+        console.log(err);
+        res
+        .status(200)
+        .json({"status":"failed"});
+      }
+      var output = [];
+      console.log(result.length);
+
+      var range = 16100; //10 miles
+      if(result.length != 0){
+        for(var index in result){
+
+          for (var objIndex in result[index].categories){
+            if(result[index].categories[objIndex]['alias'] == req.query['category']){
+
+              var dist = geolib.getDistance(
+                //{latitude: Number(req.query['latitude']), longitude: Number(req.query['longitude'])},
+                {latitude: Number(37.3412530), longitude: Number(-121.8949750)}, //should replace  with session data
+                {latitude: Number(result[index].coordinates['latitude']), longitude: Number(result[index].coordinates['longitude'])}
+                );
+              console.log("Distance is:"+dist);
+              if(dist <= range){
+                console.log(result[index]);
+                output.push(result[index]);
+                console.log("Within range...........");
+              }
+              break;
+            }
+          }
+
+        }
+
+
+      }
+
+
+      res
+      .status(200)
+      .json(output);
+    });
+
+  });
+*/
+
+});
+
 
 module.exports = router;
 
