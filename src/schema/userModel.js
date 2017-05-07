@@ -17,7 +17,9 @@ var userSchema = new mongoose.Schema({
 	user_city : {type: String},
 	user_zipcode : {type: String},
 	user_country : {type: String},
-	user_phone: {type: String}
+	user_phone: {type: String},
+	user_latitude: {type: String},
+	user_longitude: {type: String},
 });
 
 userSchema.plugin(autoIncrement.plugin, {model: 'users', field: 'user_id'});

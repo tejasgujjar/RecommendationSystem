@@ -164,38 +164,38 @@ router.get('/getRestaurantsForProfile',function(req,res){
 //SignUp USER
 router.post('/signupuser', function(req, res, next) {
 	console.log("/signupuser");
-	console.log(req.query.USER_SIGNUP_INFO);
+	var query_obj = JSON.parse(req.query.USER_SIGNUP_INFO);
 
-	user.findOne({ "user_email": req.query.USER_SIGNUP_INFO.email}, function (err, document){
+
+	user.findOne({ "user_email": query_obj.email}, function (err, document){
+
 		if(err){
 
 			console.log(err);
 			res.send({"status":409});
 			throw err;
 		}
-		console.log(document)
-		//console.log(Object.keys(document).length);
+
 
 		if(document == null){
 
-
+			
 			var userInstance = new user({
-				user_firstname: req.query.USER_SIGNUP_INFO.firstname,
-				user_lastname: req.query.USER_SIGNUP_INFO.lastname,
-				user_email: req.query.USER_SIGNUP_INFO.email,
-				user_password: req.query.USER_SIGNUP_INFO.password,
+				user_firstname: query_obj.firstname,
+				user_lastname: query_obj.lastname,
+				user_email: query_obj.email,
+				user_password: query_obj.password,
 				//user_cuisine : req.query.USER_SIGNUP_INFO.cuisine,
-				user_streetName : req.query.USER_SIGNUP_INFO.streetname,
-				user_state : req.query.USER_SIGNUP_INFO.state,
-				user_city : req.query.USER_SIGNUP_INFO.city,
-				user_zipcode : req.query.USER_SIGNUP_INFO.zipcode,
-				user_country: req.query.USER_SIGNUP_INFO.country,
-				user_phone : req.query.USER_SIGNUP_INFO.contactno
+				user_streetName : query_obj.streetname,
+				user_state : query_obj.state,
+				user_city : query_obj.city,
+				user_zipcode : query_obj.zipcode,
+				user_country: query_obj.country,
+				user_phone : query_obj.contactno,
+				user_latitude: query_obj.latitude,
+				user_longitude: query_obj.longitude
 			});
 
-			console.log("=====");
-			console.log(userInstance);
-			console.log("=====");
 			userInstance.save(function (err) {
 					if (err) {
 						res.send({"status":409});
