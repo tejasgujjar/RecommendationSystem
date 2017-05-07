@@ -161,6 +161,64 @@ router.get('/getRestaurantsForProfile',function(req,res){
 
 });
 
+//SignUp USER
+router.post('/signupuser', function(req, res, next) {
+	console.log("/signupuser");
+	var query_obj = JSON.parse(req.query.USER_SIGNUP_INFO);
+
+
+	user.findOne({ "user_email": query_obj.email}, function (err, document){
+
+		if(err){
+
+			console.log(err);
+			res.send({"status":409});
+			throw err;
+		}
+
+
+		if(document == null){
+
+			
+			var userInstance = new user({
+				user_firstname: query_obj.firstname,
+				user_lastname: query_obj.lastname,
+				user_email: query_obj.email,
+				user_password: query_obj.password,
+				//user_cuisine : req.query.USER_SIGNUP_INFO.cuisine,
+				user_streetName : query_obj.streetname,
+				user_state : query_obj.state,
+				user_city : query_obj.city,
+				user_zipcode : query_obj.zipcode,
+				user_country: query_obj.country,
+				user_phone : query_obj.contactno,
+				user_latitude: query_obj.latitude,
+				user_longitude: query_obj.longitude
+			});
+
+			userInstance.save(function (err) {
+					if (err) {
+						res.send({"status":409});
+					} else {
+						console.log("I am here coz of success");
+						res.send({"status":200});
+					}
+				});			
+
+			}
+			else{
+
+				console.log("user already exists");
+				res.send({"status":409});
+			}
+
+				
+	});
+
+
+
+
+});
 
 module.exports = router;
 
