@@ -9,16 +9,19 @@ var userSchema = new mongoose.Schema({
 	user_firstname: {type: String},
 	user_lastname: {type: String},
 	user_email: {type: String},
+	user_password: {type: String},
 	user_id: {type: Number, unique: true},
-	user_cuisine : {type: String},
+	//user_cuisine : [{type: String}],
 	user_streetName : {type: String},
 	user_state : {type: String},
+	user_city : {type: String},
 	user_zipcode : {type: String},
+	user_country : {type: String},
 	user_phone: {type: String}
 });
 
-userSchema.plugin(autoIncrement.plugin, {model: 'user', field: 'user_id'});
+userSchema.plugin(autoIncrement.plugin, {model: 'users', field: 'user_id'});
 
-var user = mongoose.model('user', userSchema);
+var user = mongoose.model('users', userSchema);
 
 module.exports = user;

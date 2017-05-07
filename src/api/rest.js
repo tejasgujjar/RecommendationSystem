@@ -161,6 +161,64 @@ router.get('/getRestaurantsForProfile',function(req,res){
 
 });
 
+//SignUp USER
+router.post('/signupuser', function(req, res, next) {
+	console.log("/signupuser");
+	console.log(req.query.USER_SIGNUP_INFO);
+
+	user.findOne({ "user_email": req.query.USER_SIGNUP_INFO.email}, function (err, document){
+		if(err){
+
+			console.log(err);
+			res.send({"status":409});
+			throw err;
+		}
+		console.log(document)
+		//console.log(Object.keys(document).length);
+
+		if(document == null){
+
+
+			var userInstance = new user({
+				user_firstname: req.query.USER_SIGNUP_INFO.firstname,
+				user_lastname: req.query.USER_SIGNUP_INFO.lastname,
+				user_email: req.query.USER_SIGNUP_INFO.email,
+				user_password: req.query.USER_SIGNUP_INFO.password,
+				//user_cuisine : req.query.USER_SIGNUP_INFO.cuisine,
+				user_streetName : req.query.USER_SIGNUP_INFO.streetname,
+				user_state : req.query.USER_SIGNUP_INFO.state,
+				user_city : req.query.USER_SIGNUP_INFO.city,
+				user_zipcode : req.query.USER_SIGNUP_INFO.zipcode,
+				user_country: req.query.USER_SIGNUP_INFO.country,
+				user_phone : req.query.USER_SIGNUP_INFO.contactno
+			});
+
+			console.log("=====");
+			console.log(userInstance);
+			console.log("=====");
+			userInstance.save(function (err) {
+					if (err) {
+						res.send({"status":409});
+					} else {
+						console.log("I am here coz of success");
+						res.send({"status":200});
+					}
+				});			
+
+			}
+			else{
+
+				console.log("user already exists");
+				res.send({"status":409});
+			}
+
+				
+	});
+
+
+
+
+});
 
 module.exports = router;
 
