@@ -19,14 +19,17 @@ def twitter_update(restaurant,state):
     db.authenticate("restUser", "restUser123#")
     val = 0
     if state == 1:
-        val = 0.1
+        db.restaurants_dump.update_one({"name": re.compile(restaurant_name, re.IGNORECASE),"rating":{"$lt":5}}, {
+            '$inc': {
+                'rating': 0.1
+            }
+        }, upsert=False)
     elif state == -1:
-        val = -0.1
-    db.restaurants_dump.update_one({"name": re.compile(restaurant_name, re.IGNORECASE)}, {
-        '$inc': {
-            'rating': val
-        }
-    }, upsert=False)
+        db.restaurants_dump.update_one({"name": re.compile(restaurant_name, re.IGNORECASE), "rating": {"$gt": 0}}, {
+            '$inc': {
+                'rating': -0.1
+            }
+        }, upsert=False)
 
     return True
 
