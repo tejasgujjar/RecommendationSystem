@@ -29,7 +29,7 @@ router.get('/insertRest', function(req, res, next) {
 
 //GET ALL RESTAURANT
 router.get('/getAllRest', function(req, res, next) {
-	console.log("/getAllRest");	
+	console.log("/getAllRest");
 	restaurant.find({}, function (err, document) {
 		res.send(document);
 	});
@@ -37,7 +37,7 @@ router.get('/getAllRest', function(req, res, next) {
 
 //GET ONE RESTAURANT
 router.get('/getRest', function(req, res, next) {
-	console.log("/getRest");	
+	console.log("/getRest");
 	restaurant.findOne({ rest_name: "Smokin Joes"}, function (err, document){
 		if(err){
 			console.log(err);
@@ -76,7 +76,7 @@ router.get('/insertUser', function(req, res, next) {
 
 //GET ALL USERS
 router.get('/getUsers', function(req, res, next) {
-	console.log("/getUsers");	
+	console.log("/getUsers");
 	user.find({}, function (err, document) {
 		res.send(document);
 	});
@@ -84,7 +84,7 @@ router.get('/getUsers', function(req, res, next) {
 
 //GET ONE USER
 router.get('/getUser', function(req, res, next) {
-	console.log("/getUser");	
+	console.log("/getUser");
 	user.findOne({ user_firstname: "Tejas"}, function (err, document){
 		if(err){
 			console.log(err);
@@ -164,8 +164,10 @@ router.get('/getRestaurantsForProfile',function(req,res){
 //SignUp USER
 router.post('/signupuser', function(req, res, next) {
 	console.log("/signupuser");
-	var query_obj = JSON.parse(req.query.USER_SIGNUP_INFO);
+	// console.log(req);
 
+	var query_obj = req.body;
+	console.log("query obj: "+query_obj.firstname);
 
 	user.findOne({ "user_email": query_obj.email}, function (err, document){
 
@@ -179,7 +181,7 @@ router.post('/signupuser', function(req, res, next) {
 
 		if(document == null){
 
-			
+
 			var userInstance = new user({
 				user_firstname: query_obj.firstname,
 				user_lastname: query_obj.lastname,
@@ -196,6 +198,7 @@ router.post('/signupuser', function(req, res, next) {
 				user_longitude: query_obj.longitude
 			});
 
+			console.log("Instance: "+userInstance);
 			userInstance.save(function (err) {
 					if (err) {
 						res.send({"status":409});
@@ -203,7 +206,7 @@ router.post('/signupuser', function(req, res, next) {
 						console.log("I am here coz of success");
 						res.send({"status":200});
 					}
-				});			
+				});
 
 			}
 			else{
@@ -212,7 +215,7 @@ router.post('/signupuser', function(req, res, next) {
 				res.send({"status":409});
 			}
 
-				
+
 	});
 
 
@@ -220,8 +223,9 @@ router.post('/signupuser', function(req, res, next) {
 
 });
 
+router.get('/getSuccess', function(req, res, next) {
+	console.log("/getSuccess");
+	res.send({"status":200});
+});
+
 module.exports = router;
-
-
-
-
