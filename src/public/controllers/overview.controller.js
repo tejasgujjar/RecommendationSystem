@@ -4,7 +4,7 @@ angular.module("RecommendationSystem")
 .controller('OverviewCtrl', function($scope, $location,$http) {
 
   console.log('showing RecommendationSystem');
-  
+
   // $(".sidebar").hide();
   // setTimeout(function(){
   //   // $(".sidebar").show();
@@ -23,6 +23,12 @@ angular.module("RecommendationSystem")
 			   },function (error){
 			   		console.log("Failure");
 				});
+        var post_data = {
+          "name": // session
+          "category":"mexican" // session
+          "latitude": //session
+          "longitude": //session
+        }
 
   });
 });
@@ -43,7 +49,7 @@ angular.module("RecommendationSystem")
   display_phone: '(408) 261-2108',
   id: 'taqueria-la-veracruzana-santa-clara',
   is_closed: false,
-  location: 
+  location:
    { city: 'Santa Clara',
      display_address: [ '1510 Jackson St', 'Santa Clara, CA 95050' ],
      country: 'US',

@@ -4,7 +4,7 @@ var ejs = require('ejs');
 var MongoClient = require('mongodb').MongoClient;
 var db;
 var connected = false;
-var mongoURL = 'mongodb://localhost:27017/recommendme_db';
+var mongoURL = 'mongodb://restUser:restUser123#@ds117311.mlab.com:17311/restreco';
 var connectionList = [];
 var requestList = [];
 
