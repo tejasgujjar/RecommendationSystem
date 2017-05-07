@@ -13,6 +13,9 @@ var mongoose = require('mongoose');
 var mongourl = 'mongodb://restUser:restUser123#@ds117311.mlab.com:17311/restreco'
 mongoose.Promise = global.Promise;
 
+var session = require('express-session');
+var mongoStore = require("connect-mongo")(session)
+
 require('./routes/mongodb.js').createrconnectionpool(); //added external mongo connection temporarily
 
 mongoose.connect(mongourl, function(err) {
@@ -25,6 +28,14 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'public/views'));
 app.set('view engine', 'ejs');
+
+app.use(session({secret: 'ssshhhh', 
+    saveUninitialized: true,
+    resave: true,
+    store: new mongoStore({
+        url: mongourl
+      })
+}));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -40,6 +51,8 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/api/rest', restdb);
 app.use('/api/user', restdb);
+
+
 
 
 // catch 404 and forward to error handler
