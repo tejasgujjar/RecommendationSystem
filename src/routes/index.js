@@ -86,9 +86,12 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
 
       var range = 16100; //10 miles
       if(result.length != 0){
+        var count = 0;
         for(var index in result){
-
-          for (var objIndex in result[index].categories){
+          output.push(result[index]);
+          count++;
+          if(count == 20) break;
+          /*for (var objIndex in result[index].categories){
             if(result[index].categories[objIndex]['alias'] == req.query['category']){
 
               var dist = geolib.getDistance(
@@ -104,7 +107,7 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
               }
               break;
             }
-          }
+          }*/
 
         }
 
