@@ -249,7 +249,7 @@ router.get('/signoutuser', function(req, res, next) {
 
 router.post('/signinuser', function(req, res, next) {
 	console.log("Inside signin user");
-	console.log(req);
+	//console.log(req);
 	var query_obj = req.body;
 	console.log("query obj: "+query_obj.email);
 
@@ -307,6 +307,12 @@ router.get('/checkSession', function(req, res, next) {
 	console.log("/checkSession");
 	
 	res.send({"msg":req.session});
+});
+
+router.get('/getuserDetails', function(req, res, next) {
+	console.log("/getuserDetails new");
+	
+	res.send({"status":200,"userDetails":req.session.userDetails});
 });
 
 module.exports = router;
