@@ -71,7 +71,7 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
     //lat = 37.3412530
     //long = -121.8949750
     //http://localhost:3000/api/getRestaurantsForProfile?name=yashas&category=mexican&latitude=37.3412530&longitude=-121.8949750
-    var restaurants = _connection.collection('restaurants');
+    var restaurants = _connection.collection('restaurants_dump');
     restaurants
     .find()
     .toArray(function(err,result){
@@ -84,14 +84,17 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
       var output = [];
       console.log(result.length);
 
-      var range = 16100; //10 miles
+     var range = 16100; //10 miles
       if(result.length != 0){
+        var count = 0;
         for(var index in result){
-
-          for (var objIndex in result[index].categories){
+          output.push(result[index]);
+          count++;
+          if(count == 20) break;
+          /*for (var objIndex in result[index].categories){
             if(result[index].categories[objIndex]['alias'] == req.query['category']){
 
-              var dist = geolib.getDistance(
+             var dist = geolib.getDistance(
                 //{latitude: Number(req.query['latitude']), longitude: Number(req.query['longitude'])},
                 {latitude: Number(37.3412530), longitude: Number(-121.8949750)}, //should replace  with session data
                 {latitude: Number(result[index].coordinates['latitude']), longitude: Number(result[index].coordinates['longitude'])}
@@ -104,15 +107,15 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
               }
               break;
             }
-          }
+          }*/
 
-        }
-
-
-      }
+       }
 
 
-      res
+     }
+
+
+     res
       .status(200)
       .json(output);
     });
