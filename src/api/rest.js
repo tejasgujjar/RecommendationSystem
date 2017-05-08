@@ -3,6 +3,7 @@ var router = express.Router();
 var restaurant = require('../schema/restaurantModel');
 var restaurant_data = require('../schema/restaurantDataModel');
 var user = require('../schema/userModel');
+var NodeGeocoder = require('node-geocoder');
 
 //RESTAURANT RELATED DATABASE CALLS
 
@@ -165,9 +166,9 @@ router.get('/getRestaurantsForProfile',function(req,res){
 router.post('/signupuser', function(req, res, next) {
 	console.log("/signupuser");
 	// console.log(req);
-
 	var query_obj = req.body;
 	console.log("query obj: "+query_obj.firstname);
+
 
 	user.findOne({ "user_email": query_obj.email}, function (err, document){
 
@@ -180,20 +181,41 @@ router.post('/signupuser', function(req, res, next) {
 
 
 		if(document == null){
-			var userInstance = new user({
+			var options = {
+			  provider: 'google',
+
+			  // Optional depending on the providers
+			  httpAdapter: 'https', // Default
+			  apiKey: 'AIzaSyBya0eWeNGso4pQZZmjyApKOm2PnaU-P5w', // for Mapquest, OpenCage, Google Premier
+			  formatter: null         // 'gpx', 'string', ...
+			};
+
+
+			var geocoder = NodeGeocoder(options);
+
+			// Using callback
+			geocoder.geocode(query_obj.streetname+" "+query_obj.city, function(err, result) {
+
+				var latitude="", longitude="";
+				if(result.length){
+						latitude = result[0].latitude;
+						longitude = result[0].longitude;
+				}
+
+			  var userInstance = new user({
 				user_firstname: query_obj.firstname,
 				user_lastname: query_obj.lastname,
 				user_email: query_obj.email,
 				user_password: query_obj.password,
-				user_cuisine : req.query.cuisine,
+				user_cuisine : query_obj.cuisines,
 				user_streetName : query_obj.streetname,
 				user_state : query_obj.state,
 				user_city : query_obj.city,
 				user_zipcode : query_obj.zipcode,
 				user_country: query_obj.country,
 				user_phone : query_obj.contactno,
-				user_latitude: query_obj.latitude,
-				user_longitude: query_obj.longitude
+				user_latitude: latitude,
+				user_longitude: longitude
 			});
 
 			console.log("Instance: "+userInstance);
@@ -206,6 +228,11 @@ router.post('/signupuser', function(req, res, next) {
 					}
 				});
 
+
+			});
+
+
+
 			}
 			else{
 
@@ -216,18 +243,59 @@ router.post('/signupuser', function(req, res, next) {
 
 	});
 
-
-
-
 });
 
+router.get('/signoutuser', function(req, res, next) {
+	req.session.destroy();
+	res.send({"status":200});
+});
+
+router.post('/signinuser', function(req, res, next) {
+	console.log("Inside signin user");
+	console.log(req);
+	var query_obj = req.body;
+	console.log("query obj: "+query_obj.email);
+
+	user.findOne({ "user_email": query_obj.email,"user_password":query_obj.password}, function (err, document){
+
+		if(err){
+
+			console.log(err);
+			res.send({"status":409});
+			throw err;
+		}
+
+		if(document == null){
+			console.log("Invalid user");
+			res.send({"status":409});
+		}
+		else{
+
+			req.session.userDetails = document;
+			console.log(req.session.userDetails);
+			res.send({"status":200});
+		}
+
+
+
+	});
+
+});
 router.get('/getSuccess', function(req, res, next) {
 	console.log("/getSuccess");
+
 	setTimeout(function(){
 		console.log("succsss");
 		res.send({"status":200});
 	},3000);
+	res.send({"status":200});
+});
 
+
+router.get('/checkSession', function(req, res, next) {
+	console.log("/checkSession");
+
+	res.send({"msg":req.session});
 });
 
 module.exports = router;
