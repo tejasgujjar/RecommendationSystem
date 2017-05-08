@@ -74,7 +74,7 @@ router.post('/api/postReview', function(req, res, next) {
     console.log(query_obj);
     restaurants.update(
        {"id":Number(query_obj.restaurant_id)},
-       { "$push": {"review":{"userid":req.session.userDetails.user_id,"username":req.session.userDetails.user_firstname,"restid":query_obj.restaurant_id,"ratings":query_obj.rating,"comment":query_obj.review_msg}}
+       { "$push": {"review":{"userid":req.session.userDetails.user_id+"","username":req.session.userDetails.user_firstname,"restid":query_obj.restaurant_id,"ratings":query_obj.rating,"comment":query_obj.review_msg}}
     },function(err,doc){
 
 
@@ -90,7 +90,7 @@ router.post('/api/postReview', function(req, res, next) {
 
 
       user_reviews.insert(
-       {"userid":req.session.userDetails.user_id,"restid":query_obj.restaurant_id,"ratings":query_obj.rating,"comment":query_obj.review_msg},
+       {"userid":req.session.userDetails.user_id+"","restid":query_obj.restaurant_id,"ratings":query_obj.rating,"comment":query_obj.review_msg},
        
     function(err2,doc2){
 
