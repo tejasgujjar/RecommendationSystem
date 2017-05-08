@@ -62,7 +62,69 @@ router.get('/', function(req, res, next) {
   res.render('home', { title: 'Restaurant Recommendation System' });
 });
 
+router.post('/api/postReview', function(req, res, next) {
+  console.log("inside /api/postReview");
+  
+  mongoconn.connect(function(_connection){
+        
+    var restaurants = _connection.collection('restaurants_dump');
+    var user_reviews = _connection.collection('user_reviews_test');
+    var query_obj = req.body;
 
+    console.log(query_obj);
+    restaurants.update(
+       {"id":Number(query_obj.restaurant_id)},
+       { "$push": {"review":{"userid":req.session.userDetails.user_id+"","username":req.session.userDetails.user_firstname,"restid":query_obj.restaurant_id,"ratings":query_obj.rating,"comment":query_obj.review_msg}}
+    },function(err,doc){
+
+
+      if(err){
+        console.log(err);
+        res
+        .status(400)
+        .json({"status":400});
+      }
+
+      console.log(doc);
+
+
+
+      user_reviews.insert(
+       {"userid":req.session.userDetails.user_id+"","restid":query_obj.restaurant_id,"ratings":query_obj.rating,"comment":query_obj.review_msg},
+       
+    function(err2,doc2){
+
+
+      if(err2){
+        console.log(err2);
+        res
+        .status(400)
+        .json({"status":400});
+      }
+
+      console.log(doc2);
+
+    res
+        .status(200)
+        .json({"status":200});
+
+    });
+
+
+    });
+
+
+
+
+  });
+
+/*db.collection.update(
+    { "_id": "efgh" },
+    { "$push": { "myArray": { "field1": "abc", "field2": "def" } }
+)*/
+
+
+}); 
 
 router.get('/api/getRestaurantsForProfile',function(req,res){
   console.log("inside getRestaurantsForProfile");
@@ -71,7 +133,7 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
     //lat = 37.3412530
     //long = -121.8949750
     //http://localhost:3000/api/getRestaurantsForProfile?name=yashas&category=mexican&latitude=37.3412530&longitude=-121.8949750
-    var restaurants = _connection.collection('restaurants');
+    var restaurants = _connection.collection('restaurants_dump');
     restaurants
     .find()
     .toArray(function(err,result){
@@ -86,9 +148,12 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
 
       var range = 16100; //10 miles
       if(result.length != 0){
+        var count = 0;
         for(var index in result){
-
-          for (var objIndex in result[index].categories){
+          output.push(result[index]);
+          count++;
+          if(count == 20) break;
+          /*for (var objIndex in result[index].categories){
             if(result[index].categories[objIndex]['alias'] == req.query['category']){
 
               var dist = geolib.getDistance(
@@ -104,7 +169,7 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
               }
               break;
             }
-          }
+          }*/
 
         }
 
