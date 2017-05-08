@@ -319,4 +319,5 @@ router.get('/getuserDetails', function(req, res, next) {
 	res.send({"status":200,"userDetails":req.session.userDetails});
 });
 
+
 module.exports = router;
