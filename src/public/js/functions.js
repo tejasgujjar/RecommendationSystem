@@ -173,7 +173,7 @@ function check_and_save_review(){
     $.ajax({
       url: URL + '/api/postReview',
       type: 'post',
-      // data:
+      data: post_data,
       success: function(data) {
           //console.log("Recommendation data: "+JSON.stringify(data));
           $('#restaurantModal').modal('hide');
@@ -192,6 +192,22 @@ function check_and_save_review(){
 
 function logout_user(){
   console.log("logged out");
+  $.ajax({
+    url: URL + '/api/rest/signoutuser',
+    type: 'get', // This is the default though, you don't actually need to always mention it
+    success: function(data) {
+        //console.log("Recommendation data: "+JSON.stringify(data));
+        window.location.href = URL + "/new-ui";
+    },
+    error: function(data) {
+      BootstrapDialog.alert({
+              title: 'Logout',
+              message: 'Failed to logout. Please try again later',
+              type: BootstrapDialog.TYPE_WARNING, // <-- Default value is BootstrapDialog.TYPE_PRIMARY
+              closable: true // <-- Default value is false
+          });
+    }
+  });
 }
 
 function load_homepage_ajax(){
@@ -317,6 +333,10 @@ function generate_post_div(obj){
   var review_DOM = $('#review-body');
   review_DOM.html(" ");
   var reviews = obj.review;
+  if (reviews == undefined){
+    reviews = [];
+    review_DOM.append("No reviews found for this restaurant");
+  }
   var data = "";
   var $username = "";
   var $rating = "";
