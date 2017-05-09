@@ -780,6 +780,14 @@ height: auto;
 .review{
 	border-bottom: 1px solid grey;
 	padding: 10px;
+
+}
+.user-rating{
+	display: inline-flex;
+	width: 100%;
+}
+.user-rating p:first-child{
+	width: 15%;
 }
 #indicator-icon{
 	position: fixed;
@@ -800,6 +808,34 @@ height: auto;
 .dummy-space{
 	height: 700px;
 }
+.dummy-space-2{
+	height: 400px;
+}
+
+span.stars, span.stars span {
+    display: block;
+    background: url(/public/stylesheets/img/stars.png) 0 -16px repeat-x;
+    width: 80px;
+    height: 16px;
+}
+
+span.stars span {
+    background-position: 0 0;
+}
+
+.review-modal{
+	    background: linear-gradient(#f3f3f3, #daba90);
+}
+.review-rating-section{
+	display: -webkit-inline-box;
+	margin-left: auto;
+	margin-right: 3%;
+}
+.review-text-head{
+	display: inline-flex;
+	width: 100%;
+}
+
 @media(max-width:768px){
     #login-dp{
         background-color: inherit;
