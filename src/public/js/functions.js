@@ -3,7 +3,8 @@ var HOST = "http://localhost";
 var PORT = "3000"
 var URL = HOST + ":" + PORT;
 console.log("Application URL: "+URL);
-
+var RECOMMENDATION_DATA = "";
+var REST_OBJ = ""
 $('a.page-scroll').click(function() {
     if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
       var target = $(this.hash);
@@ -121,21 +122,73 @@ $(document).ready(function() {
   $('#btnDialog').click(function(){
     BootstrapDialog.alert('Loaded home page!');
   });
-  // load_homepage_ajax();
-  $('#restaurantModal').modal('show');
-  $('#restaurant_list_div div.card.row').unbind();
-  $('#restaurant_list_div div.card.row').bind('click',function(e){
-    console.log("view: "+e);
+  load_homepage_ajax();
+  //$('#restaurantModal').modal('show');
+
+  // $('#restaurant_list_div div.card.row').unbind();
+  // $('#restaurant_list_div div.card.row').bind('click',function(e){
+  //   console.log("view: "+e);
+  // });
+  // $('#restaurant_list_div .card .card-footer').unbind();
+  // $('#restaurant_list_div .card .card-footer').bind('click',function(e){
+  //   console.log("view: "+e);
+  // });
+  // $('#restaurant_list_div div').unbind();
+  // $('#restaurant_list_div div').bind('click',function(e){
+  //   console.log("view: "+e);
+  // });
+
+  $('#post_review_btn').click(function(){
+    check_and_save_review();
   });
-  $('#restaurant_list_div .card .card-footer').unbind();
-  $('#restaurant_list_div .card .card-footer').bind('click',function(e){
-    console.log("view: "+e);
-  });
-  $('#restaurant_list_div div').unbind();
-  $('#restaurant_list_div div').bind('click',function(e){
-    console.log("view: "+e);
-  });
+
+  $(function() {
+    $('span.stars').stars();
 });
+});
+
+function check_and_save_review(){
+  var msg = $('#review_text').val();
+  var rev_rating = $('#review_rating').val();
+  console.log("review msg: "+msg);
+  if (msg.trim() == ""){
+    console.log("no msg");
+    BootstrapDialog.alert({
+            title: 'Post review',
+            message: 'Please enter review.',
+            type: BootstrapDialog.TYPE_WARNING, // <-- Default value is BootstrapDialog.TYPE_PRIMARY
+            closable: true // <-- Default value is false
+        });
+  }
+  else{
+    console.log("send ajax: "+msg);
+
+    console.log("Rating:"+rev_rating);
+
+    var post_data = {
+      "restaurant_id":REST_OBJ.id,
+      "review_msg":msg,
+      "rating":rev_rating
+    }
+    $.ajax({
+      url: URL + '/api/postReview',
+      type: 'post',
+      // data:
+      success: function(data) {
+          //console.log("Recommendation data: "+JSON.stringify(data));
+          $('#restaurantModal').modal('hide');
+      },
+      error: function(data) {
+        BootstrapDialog.alert({
+                title: 'Post review',
+                message: 'Unable to post review at this moment. Please try again later.',
+                type: BootstrapDialog.TYPE_WARNING, // <-- Default value is BootstrapDialog.TYPE_PRIMARY
+                closable: true // <-- Default value is false
+            });
+      }
+    });
+  }
+}
 
 function logout_user(){
   console.log("logged out");
@@ -143,10 +196,11 @@ function logout_user(){
 
 function load_homepage_ajax(){
   $.ajax({
-    url: URL + '/api/getRestaurantsForProfile',
+    url: URL + '/api/rest/getRestaurantsForProfileTemp',
     type: 'get', // This is the default though, you don't actually need to always mention it
     success: function(data) {
-        console.log("Recommendation data: "+data);
+        //console.log("Recommendation data: "+JSON.stringify(data));
+        RECOMMENDATION_DATA = data;
         load_homepage(data);
     },
     error: function(data) {
@@ -177,6 +231,7 @@ function load_homepage(main_data){
   var $phone = "726487136"
   var $cusines = "mexi"
   var $id = "3";
+  var dummySpace = "<div class='dummy-space-2'></div>";
   var restaurant_DOM = $('#restaurant_list_div');
   restaurant_DOM.html(" ");
   var data = "";
@@ -205,6 +260,7 @@ function load_homepage(main_data){
     var card_footer = "<div class='row card-footer'><button type='button' class='btn btn-default wdth-100 view-detail-btn' name='button'>View</button></div></div>";
     restaurant_DOM.append(card_head+card_body+card_footer);
   }
+  restaurant_DOM.append(dummySpace);
   attach_card_events();
 }
 
@@ -216,9 +272,7 @@ function parse_id(id){
 function attach_card_events(){
   $('.restaurant-img').unbind();
   $('.restaurant-img').bind('click',function(e){
-    console.log("view: "+e);
     var id = this.parentElement.parentElement.id;
-    console.log("view: "+id);
     show_restaurant_details(parse_id(id));
   });
 
@@ -230,7 +284,63 @@ function attach_card_events(){
   });
 }
 
+function get_selected_restaurant_object(id) {
+  var obj = "";
+  for(var i=0;i<RECOMMENDATION_DATA.length;i++){
+      obj = RECOMMENDATION_DATA[i]
+      if (obj.id == id){
+        console.log("Selected id, got Obj of id: "+id);
+        return obj;
+      }
+  }
+  return false;
+}
+
 function show_restaurant_details(id){
-  //show review page
-  $('#restaurantModal').modal('show');
+  var obj = get_selected_restaurant_object(id);
+  if (obj){
+    REST_OBJ = obj;
+    generate_post_div(obj);
+    $('#restaurantModal').modal('show');
+  }else{
+    BootstrapDialog.alert({
+            title: 'Post review',
+            message: 'Failed to get restaurant details. Please try again',
+            type: BootstrapDialog.TYPE_WARNING, // <-- Default value is BootstrapDialog.TYPE_PRIMARY
+            closable: true // <-- Default value is false
+        });
+  }
+
+}
+
+function generate_post_div(obj){
+  var review_DOM = $('#review-body');
+  review_DOM.html(" ");
+  var reviews = obj.review;
+  var data = "";
+  var $username = "";
+  var $rating = "";
+  var $review = "";
+  for(var i=0;i<reviews.length;i++){
+      data = reviews[i];
+      $username = data.username;
+      $rating = data.ratings;
+      $review = data.comment;
+      review_DOM.append("<div class='review'><div class='user-rating'><p><strong>"+$username +
+      "</strong></p><span class='stars'>" + $rating + "</span></div><div>" + $review + "</div></div>");
+    }
+      $('span.stars').stars();
+  }
+
+$.fn.stars = function() {
+    return $(this).each(function() {
+        // Get the value
+        var val = parseFloat($(this).html());
+        // Make sure that the value is in 0 - 5 range, multiply to get width
+        var size = Math.max(0, (Math.min(5, val))) * 16;
+        // Create stars holder
+        var $span = $('<span />').width(size);
+        // Replace the numerical value with stars
+        $(this).html($span);
+    });
 }

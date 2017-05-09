@@ -6,14 +6,17 @@ from tweepy import OAuthHandler
 from textblob import TextBlob
 import sys
 import json
-from __future__ import print_function
+# from __future__ import print_function
 from pymongo import MongoClient
+
+RESTAURANT = None
+POLARITY = None
 
 
 def twitter_update(restaurant,state):
     if state == 0:
         return True
-    restaurant_name  = restaurant[1:].replace("_"," ").lower()
+    restaurant_name  = restaurant.replace("_"," ").lower()
     connection = MongoClient("ds117311.mlab.com", 17311)
     db = connection['restreco']
     db.authenticate("restUser", "restUser123#")
@@ -34,9 +37,17 @@ def twitter_update(restaurant,state):
     return True
 
 # list of restaurant from the db
-LOOKUP_KEYWORDS = ['pistahouse', 'inchinbamboo'] # to be taken from the mongo DB
+LOOKUP_KEYWORDS = ['pistahouse', "Bibo's Ny Pizza", "Gulzaar Halal Restaurant & catering", "recommendMeRestaurant"] # to be taken from the mongo DB
+
+
+for i in xrange(len(LOOKUP_KEYWORDS)):
+    LOOKUP_KEYWORDS[i] = LOOKUP_KEYWORDS[i].replace(" ", "_")
+
+print("str: "+str(LOOKUP_KEYWORDS))
+
 
 class AnalyzeTweet():
+
     def clean_tweet(self, tweet):
         '''
         Utility function to clean tweet text by removing links, special characters
@@ -49,24 +60,29 @@ class AnalyzeTweet():
         Utility function to classify sentiment of passed tweet
         using textblob's sentiment method
         '''
+        restaurant = "-"
+        for rest in LOOKUP_KEYWORDS:
+            if rest in tweet:
+                restaurant = rest
+
         # create TextBlob object of passed tweet text
         analysis = TextBlob(self.clean_tweet(tweet))
         # set sentiment
         print("Polarity:"+str(analysis.sentiment.polarity))
         if analysis.sentiment.polarity > 0:
-            return 'positive'
+            return 1
         elif analysis.sentiment.polarity == 0:
-            return 'neutral'
+            return 0
         else:
-            return 'negative'
+            return -1
 
-tweet_analyzer = AnalyzeTweet()
-input_text = "This restaurant #pistahouse"
-#input_text = ""
-print("Input:"+input_text+"\nSentiment:"+tweet_analyzer.get_tweet_sentiment(input_text))
-sys.exit()
+# tweet_analyzer = AnalyzeTweet()
+# input_text = "This restaurant #pistahouse"
+# print("Input:"+input_text+"\nSentiment:"+tweet_analyzer.get_tweet_sentiment(input_text))
+# sys.exit()
 
 class MyListener(StreamListener):
+
     def on_data(self, data):
         try:
             with open('twitter_data.json', 'a') as f:
@@ -76,14 +92,14 @@ class MyListener(StreamListener):
                 print("NEW TWEET: "+str(tweet))
                 sentiment = tweet_analyzer.get_tweet_sentiment(tweet)
                 restaurant = ""
-                print("Sentiment: "+sentiment)
+                print("Sentiment: "+str(sentiment))
                 # get restaurant name from the text
                 for rest in LOOKUP_KEYWORDS:
                     if rest in tweet:
                         restaurant = rest
                 print("Restaurant: "+restaurant)
-                #update db
-                #tweet_analyzer.update_db(sentiment)
+
+                twitter_update(restaurant, sentiment)
                 return True
         except BaseException as e:
             print("Error on_data: " % str(e))

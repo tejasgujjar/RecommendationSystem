@@ -87,9 +87,7 @@
         <div id="restaurant_list_div" style="padding:25px 0; width:70%" class="container">
           <div class="loading-msg">
               <h3>Loading best recommendations, just for you.</h3>
-              <div class="dummy-space">
-
-              </div>
+              <div class="dummy-space"></div>
           </div>
           <!-- <div class="card row">
             <div class="row card-head">
@@ -167,28 +165,89 @@
     <div class="modal-header">
       <h4 id="rd-name" class="modal-title">Pizza hut</h4>
     </div>
-    <div class="modal-body">
-      <div class="restaurant-detail">
-
-      </div>
-      <p>Reviews</p>
-        <div class="review-section">
+    <div  class="modal-body review-modal">
+        <p>Reviews </p>
+        <div id="review-body" class="review-section">
           <div class="review">
-              <p>User</p>
-              <p></p>
-              jkdhgsd hsd fjhsd hsjfh shfjaskdhf jskdhf sdf sd fgksd. ashfskdgksahgk . .asg klasklghadsgsdjkglskdgsdf
+              <div class="user-rating">
+                <p><strong>Username</strong></p>
+                <span class="stars">3.5</span>
+              </div>
+              <div>jkdhgsd hsd fjhsd hsjfh shfjaskdhf jskdhf sdf sd fgksd. ashfskdgksahgk . .asg klasklghadsgsdjkglskdgsdf</div>
           </div>
           <div class="review">
-              LASTjkdhgsd hsd fjhsd hsjfh shfjaskdhf jskdhf sdf sd fgksd. ashfskdgksahgk . .asg klasklghadsgsdjkglskdgsdf
+              <div class="user-rating">
+                <p><strong>Username</strong></p>
+                <span class="stars">3.5</span>
+              </div>
+              <div>jkdhgsd hsd fjhsd hsjfh shfjaskdhf jskdhf sdf sd fgksd. ashfskdgksahgk . .asg klasklghadsgsdjkglskdgsdf</div>
+          </div>
+          <div class="review">
+              <div class="user-rating">
+                <p><strong>Username</strong></p>
+                <span class="stars">3.5</span>
+              </div>
+              <div>jkdhgsd hsd fjhsd hsjfh shfjaskdhf jskdhf sdf sd fgksd. ashfskdgksahgk . .asg klasklghadsgsdjkglskdgsdf</div>
+          </div>
+          <div class="review">
+              <div class="user-rating">
+                <p><strong>Username</strong></p>
+                <span class="stars">3.5</span>
+              </div>
+              <div>jkdhgsd hsd fjhsd hsjfh shfjaskdhf jskdhf sdf sd fgksd. ashfskdgksahgk . .asg klasklghadsgsdjkglskdgsdf</div>
+          </div>
+          <div class="review">
+              <div class="user-rating">
+                <p><strong>Username</strong></p>
+                <span class="stars">3.5</span>
+              </div>
+              <div>jkdhgsd hsd fjhsd hsjfh shfjaskdhf jskdhf sdf sd fgksd. ashfskdgksahgk . .asg klasklghadsgsdjkglskdgsdf</div>
+          </div>
+          <div class="review">
+              <div class="user-rating">
+                <p><strong>Username</strong></p>
+                <span class="stars">3.5</span>
+              </div>
+              <div>jkdhgsd hsd fjhsd hsjfh shfjaskdhf jskdhf sdf sd fgksd. ashfskdgksahgk . .asg klasklghadsgsdjkglskdgsdf</div>
+          </div>
+          <div class="review">
+              <div class="user-rating">
+                <p><strong>Username</strong></p>
+                <span class="stars">3.5</span>
+              </div>
+              <div>jkdhgsd hsd fjhsd hsjfh shfjaskdhf jskdhf sdf sd fgksd. ashfskdgksahgk . .asg klasklghadsgsdjkglskdgsdf</div>
+          </div>
+          <div class="review">
+              <div class="user-rating">
+                <p><strong>Username</strong></p>
+                <span class="stars">3.5</span>
+              </div>
+              <div>jkdhgsd hsd fjhsd hsjfh shfjaskdhf jskdhf sdf sd fgksd. ashfskdgksahgk . .asg klasklghadsgsdjkglskdgsdf</div>
           </div>
         </div>
+        <hr>
         <div class="form-group">
-            <label for="exampleInputEmail1">Review</label>
-            <textarea class="form-control" rows="3" placeholder="Add your review here"></textarea>
+          <div class="review-text-head">
+            <div class="">
+                <p>Post your review here</p>
+            </div>
+
+            <div class="review-rating-section">
+              <p>Rating:</p>
+              <select id="review_rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5" selected>5</option>
+              </select>
+            </div>
+          </div>
+            <textarea id="review_text" class="form-control" rows="3" placeholder="Add your review here"></textarea>
         </div>
     </div>
   <div class="modal-footer">
-    <button id="post_review_btn"  type="button" class="btn btn-primary pull-right" data-dismiss="modal">Post review</button>
+    <button id="post_review_btn"  type="button" class="btn btn-primary pull-right">Post review</button>
     <button type="button" class="btn btn-default margin-10" data-dismiss="modal">Close</button>
   </div>
 </div>
