@@ -4,6 +4,7 @@ var restaurant = require('../schema/restaurantModel');
 var restaurant_data = require('../schema/restaurantDataModel');
 var user = require('../schema/userModel');
 var NodeGeocoder = require('node-geocoder');
+var mongoconn = require('../routes/mongodb');//mongo
 
 //RESTAURANT RELATED DATABASE CALLS
 
@@ -95,12 +96,14 @@ router.get('/getUser', function(req, res, next) {
 	});
 });
 
+
+
 router.get('/getRestaurantsForProfileTemp',function(req,res){
   console.log("inside getRestaurantsForProfileTemp");
 
   mongoconn.connect(function(_connection){
     
-    var restaurants = _connection.collection('restaurants');
+    var restaurants = _connection.collection('restaurants_dump');
     restaurants
     .find({"id":1})
     .toArray(function(err,result){
@@ -114,7 +117,7 @@ router.get('/getRestaurantsForProfileTemp',function(req,res){
       console.log(result.length);
 
       if(result.length != 0){
-      	output.push(result[index]);
+        output.push(result[0]);
       }
 
       res

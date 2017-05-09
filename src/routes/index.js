@@ -126,6 +126,43 @@ router.post('/api/postReview', function(req, res, next) {
 
 }); 
 
+
+
+router.get('/getRestaurantsForProfileTemp',function(req,res){
+  console.log("inside getRestaurantsForProfileTemp");
+
+  mongoconn.connect(function(_connection){
+    
+    var restaurants = _connection.collection('restaurants');
+    restaurants
+    .find({"id":1})
+    .toArray(function(err,result){
+      if(err){
+        console.log(err);
+        res
+        .status(200)
+        .json({"status":"failed"});
+      }
+      var output = [];
+      console.log(result.length);
+
+      if(result.length != 0){
+        output.push(result[index]);
+      }
+
+      res
+      .status(200)
+      .json(output);
+    });
+
+  });
+
+});
+
+
+
+
+
 router.get('/api/getRestaurantsForProfile',function(req,res){
   console.log("inside getRestaurantsForProfile");
   console.log(req.query);
