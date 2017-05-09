@@ -278,7 +278,6 @@ router.post('/signinuser', function(req, res, next) {
 		}
 
 
-
 	});
 
 });
@@ -312,6 +311,13 @@ router.get('/checkSession', function(req, res, next) {
 	
 	res.send({"msg":req.session});
 });
+
+router.get('/getSuccess', function(req, res, next) {
+	console.log("/getSuccess");
+	setTimeout(function(){
+		console.log("succsss");
+		res.send({"status":200});
+	},3000);
 
 router.get('/getuserDetails', function(req, res, next) {
 	console.log("/getuserDetails new");
