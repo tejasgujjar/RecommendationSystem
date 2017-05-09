@@ -31,6 +31,8 @@
     ================================================== -->
     <link rel="stylesheet" type="text/css"  href="/public/stylesheets/css/style.css">
     <link rel="stylesheet" type="text/css" href="/public/stylesheets/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css">
+
 
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,700,300,600,800,400' rel='stylesheet' type='text/css'>
@@ -44,7 +46,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body class="home-body">
     <!-- Navigation
     ==========================================-->
     <nav id="tf-menu" class="navbar navbar-default navbar-fixed-top">
@@ -57,7 +59,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="">RecommendMe</a>
+          <a class="navbar-brand" href="http://localhost:3000/new-ui">RecommendMe</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -65,7 +67,7 @@
             <li><a href="#tf-home" class="page-scroll">Home</a></li>
             <li><a href="#tf-preferences" class="page-scroll">Preferences</a></li>
             <li><a href="#tf-settings" class="page-scroll">Settings</a></li>
-            <li class="login-btn"><button type="submit"  data-toggle="modal" data-target="#loginModal" class="btn btn-sm btn-danger">Logout</button>
+            <li class="login-btn"><button type="submit"  id="logout-btn" class="btn btn-sm btn-danger">Logout</button>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
@@ -81,9 +83,15 @@
             </div> -->
         </div>
     </div>
-    <div id="tf-preferences">
-        <div style="padding:25px 0; width:70%" class="container">
-          <div class="card row">
+    <div id="tf-list">
+        <div id="restaurant_list_div" style="padding:25px 0; width:70%" class="container">
+          <div class="loading-msg">
+              <h3>Loading best recommendations, just for you.</h3>
+              <div class="dummy-space">
+
+              </div>
+          </div>
+          <!-- <div class="card row">
             <div class="row card-head">
               <div class="col-md-2 restaurant-img">
                   <img src="https://s3-media1.fl.yelpcdn.com/bphoto/lSZiyF5J_vCHlVYR_Yp7UQ/o.jpg" alt="">
@@ -91,173 +99,48 @@
               <div class="col-md-8 restaurant-name">
                 <h2><strong>Pizza Hut</strong></h2>
                 <p><small><strong>San Jose, CA</strong>  </small></p>
-                <p><small>118 Paseo De San Antonio Walk</small></p>
-
+                <p class="margin-0"><small>118 Paseo De San Antonio Walk, San Jose, CA, 95110</small></p>
               </div>
               <div class="col-md-2">
                 <div class="rating-div">
                     4.6
                 </div>
+                <small>25 Reviews</small>
               </div>
             </div>
-            <div class="row card-body">
+            <div class="row card-body margin-0">
               <div class="">
                   <div class="restaurant-category">
-                    <small>cuisine</small>
-                    <span>askjd</span>
+                    <label for="">Cusines:</label>
+                    <p>Indian, Chinese</p>
                   </div>
                   <div class="restaurant-category">
-                    <small>cuisine</small>
-                    <span>askjd</span>
-                  </div>
-                  <div class="restaurant-category">
-                    <span><small>cuisine</small></span>
-                    <span>askjd</span>
+                    <label for="">Phone:</label>
+                    <p>(669) 238-8115</p>
                   </div>
               </div>
             </div>
-            <div class="row border card-footer">
-              <button type="button" class="btn btn-default" name="button">View</button>
+            <div class="row card-footer">
+              <button type="button" class="btn btn-default wdth-100" name="button">View</button>
             </div>
+          </div> -->
+        </div>
+    </div>
+
+    <!-- Preferences Section
+    ==========================================-->
+    <div id="tf-preferences" class="dsp-none">
+        <div class="container">
+          <div class="review">
+              jkdhgsd hsd fjhsd hsjfh shfjaskdhf jskdhf sdf sd fgksd. ashfskdgksahgk . .asg klasklghadsgsdjkglskdgsdf
+          </div>
+
+          <div class="review">
+              jkdhgsd hsd fjhsd hsjfh shfjaskdhf jskdhf sdf sd fgksd. ashfskdgksahgk . .asg klasklghadsgsdjkglskdgsdf
           </div>
         </div>
     </div>
 
-
-
-    <!-- dummmy -->
-    <div id="tf-settings" class="text-center">
-        <div class="container">
-
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-
-                    <div class="section-title center">
-                        <h2>Feel free to <strong>contact us</strong></h2>
-                        <div class="line">
-                            <hr>
-                        </div>
-                        <div class="clearfix"></div>
-                        <small><em>Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</em></small>
-                    </div>
-
-                    <form>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Message</label>
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-
-                        <button type="submit" class="btn tf-btn btn-default">Submit</button>
-                    </form>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div id="tf-settings" class="text-center">
-        <div class="container">
-
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-
-                    <div class="section-title center">
-                        <h2>Feel free to <strong>contact us</strong></h2>
-                        <div class="line">
-                            <hr>
-                        </div>
-                        <div class="clearfix"></div>
-                        <small><em>Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</em></small>
-                    </div>
-
-                    <form>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Message</label>
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-
-                        <button type="submit" class="btn tf-btn btn-default">Submit</button>
-                    </form>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Contact Section
-    ==========================================-->
-    <div id="tf-settings" class="text-center">
-        <div class="container">
-
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-
-                    <div class="section-title center">
-                        <h2>Feel free to <strong>contact us</strong></h2>
-                        <div class="line">
-                            <hr>
-                        </div>
-                        <div class="clearfix"></div>
-                        <small><em>Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</em></small>
-                    </div>
-
-                    <form>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Message</label>
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-
-                        <button type="submit" class="btn tf-btn btn-default">Submit</button>
-                    </form>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
 
     <nav id="footer">
         <div class="container">
@@ -273,65 +156,45 @@
             </div>
         </div>
     </nav>
+    <img src="/public/stylesheets/img/spinner.gif" alt="loading..." id="indicator-icon" class="dsp-none" />
 
-    <div id="loginModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Login</h4>
-      </div>
-      <div class="modal-body">
-        <div class="middlePage">
-<!-- <div class="page-header">
-  <h1 class="logo">RecommendMe <small>Welcome to our place!</small></h1>
-</div> -->
+<div id="restaurantModal" class="modal fade " role="dialog">
+  <div class="modal-dialog modal-lg">
 
-<div class="panel panel-info">
-  <div class="panel-heading">
-    <h3 class="panel-title">Please Sign In</h3>
-  </div>
-  <div class="panel-body">
-  <div class="row">
-    <div class="social-buttons col-md-5">
-      <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
-      <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
+  <!-- Modal content-->
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 id="rd-name" class="modal-title">Pizza hut</h4>
     </div>
+    <div class="modal-body">
+      <div class="restaurant-detail">
 
-    <div class="col-md-7" style="border-left:1px solid #ccc;height:160px">
-<form class="form-horizontal">
-<fieldset>
-
-  <input id="textinput" name="textinput" type="text" placeholder="Enter User Name" class="form-control input-md">
-  <br>
-  <input id="textinput" name="textinput" type="text" placeholder="Enter Password" class="form-control input-md">
-  <!-- <div class="spacing"><a href="#"><small> Forgot Password?</small></a><br/></div> -->
-  <br>
-  <div class="spacing"><input type="checkbox" name="checkboxes" id="checkboxes-0" value="1"><small> Remember me</small></div>
-  <!-- <button id="singlebutton" name="singlebutton" class="btn btn-info btn-sm pull-right">Sign In</button> -->
-
-</fieldset>
-</form>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
       </div>
-      <div class="modal-footer">
-        <button id="login-btn"  type="button" class="btn btn-primary pull-right" data-dismiss="modal">Sign In</button>
-        <button type="button" class="btn btn-default margin-10" data-dismiss="modal">Close</button>
-        <a href="#tf-works" class="page-scroll" data-dismiss="modal"><button id="signup-btn-from" type="button" class="btn btn-warning pull-left" data-dismiss="modal">Sign Up</button></a>
-      </div>
+      <p>Reviews</p>
+        <div class="review-section">
+          <div class="review">
+              <p>User</p>
+              <p></p>
+              jkdhgsd hsd fjhsd hsjfh shfjaskdhf jskdhf sdf sd fgksd. ashfskdgksahgk . .asg klasklghadsgsdjkglskdgsdf
+          </div>
+          <div class="review">
+              LASTjkdhgsd hsd fjhsd hsjfh shfjaskdhf jskdhf sdf sd fgksd. ashfskdgksahgk . .asg klasklghadsgsdjkglskdgsdf
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Review</label>
+            <textarea class="form-control" rows="3" placeholder="Add your review here"></textarea>
+        </div>
     </div>
+  <div class="modal-footer">
+    <button id="post_review_btn"  type="button" class="btn btn-primary pull-right" data-dismiss="modal">Post review</button>
+    <button type="button" class="btn btn-default margin-10" data-dismiss="modal">Close</button>
   </div>
 </div>
 
+</div>
+</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="/public/js/jquery.1.11.1.js"></script>
@@ -339,12 +202,13 @@
     <script type="text/javascript" src="/public/js/bootstrap.js"></script>
     <script type="text/javascript" src="/public/js/SmoothScroll.js"></script>
     <script type="text/javascript" src="/public/js/jquery.isotope.js"></script>
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
     <script src="/public/js/owl.carousel.js"></script>
 
     <!-- Javascripts
     ================================================== -->
     <script type="text/javascript" src="/public/js/functions.js"></script>
+
 
   </body>
 </html>

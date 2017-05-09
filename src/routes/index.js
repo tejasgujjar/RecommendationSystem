@@ -146,7 +146,7 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
       var output = [];
       console.log(result.length);
 
-      var range = 16100; //10 miles
+     var range = 16100; //10 miles
       if(result.length != 0){
         var count = 0;
         for(var index in result){
@@ -156,7 +156,7 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
           /*for (var objIndex in result[index].categories){
             if(result[index].categories[objIndex]['alias'] == req.query['category']){
 
-              var dist = geolib.getDistance(
+             var dist = geolib.getDistance(
                 //{latitude: Number(req.query['latitude']), longitude: Number(req.query['longitude'])},
                 {latitude: Number(37.3412530), longitude: Number(-121.8949750)}, //should replace  with session data
                 {latitude: Number(result[index].coordinates['latitude']), longitude: Number(result[index].coordinates['longitude'])}
@@ -171,13 +171,13 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
             }
           }*/
 
-        }
+       }
 
 
-      }
+     }
 
 
-      res
+     res
       .status(200)
       .json(output);
     });

@@ -164,7 +164,6 @@ router.get('/getRestaurantsForProfile',function(req,res){
 
 //SignUp USER
 
-
 router.post('/signupuser', function(req, res, next) {
     console.log("/signupuser");
     // console.log(req);
@@ -172,12 +171,12 @@ router.post('/signupuser', function(req, res, next) {
     var query_obj = req.body;
     console.log("query obj: "+query_obj.firstname);    user.findOne({ "user_email": query_obj.email}, function (err, document){
 
-            if(err){ 
+            if(err){
 
                 console.log(err);
 	            res.send({"status":409});
 	            throw err;
-        }        
+        }
 
         if(document == null){
 
@@ -186,18 +185,18 @@ router.post('/signupuser', function(req, res, next) {
               httpAdapter: 'https', // Default
               apiKey: 'AIzaSyBya0eWeNGso4pQZZmjyApKOm2PnaU-P5w', // for Mapquest, OpenCage, Google Premier
               formatter: null         // 'gpx', 'string', ...
-            };    
+            };
 
 
 
-            var geocoder = NodeGeocoder(options);       
+            var geocoder = NodeGeocoder(options);
                  // Using callback
             geocoder.geocode(query_obj.streetname+" "+query_obj.city, function(err, result) {                var latitude="", longitude="";
-                
+
                 if(result.length){
                         latitude = result[0].latitude;
                         longitude = result[0].longitude;
-                }              
+                }
 
 
                 var userInstance = new user({
@@ -214,10 +213,10 @@ router.post('/signupuser', function(req, res, next) {
                 user_phone : query_obj.contactno,
                 user_latitude: latitude,
                 user_longitude: longitude
-            });            
+            });
 
                 console.log("Instance: "+userInstance);
-            	
+
             	userInstance.save(function (err) {
                     if (err) {
                         res.send({"status":409});
@@ -225,22 +224,22 @@ router.post('/signupuser', function(req, res, next) {
                         console.log("I am here coz of success");
                         res.send({"status":200});
                     }
-                }); 
+                });
 
-            
+
              });
 
-             
 
-             
+
+
              }
 
             else{
 
                  console.log("user already exists");
-                
+
                 res.send({"status":409});
-            }  
+            }
 
     });
 });
@@ -283,32 +282,18 @@ router.post('/signinuser', function(req, res, next) {
 });
 router.get('/getSuccess', function(req, res, next) {
 	console.log("/getSuccess");
-	var options = {
-	  provider: 'google',
-	 
-	  // Optional depending on the providers 
-	  httpAdapter: 'https', // Default 
-	  apiKey: 'AIzaSyBya0eWeNGso4pQZZmjyApKOm2PnaU-P5w', // for Mapquest, OpenCage, Google Premier 
-	  formatter: null         // 'gpx', 'string', ... 
-	};
 
-
-	var geocoder = NodeGeocoder(options);
-	 
-	// Using callback 
-	geocoder.geocode('28 Bassett st san jose', function(err, res) {
-	  console.log(res[0].latitude);
-	  console.log(res[0].longitude);
-	});
-
-
+	setTimeout(function(){
+		console.log("succsss");
+		res.send({"status":200});
+	},3000);
 	res.send({"status":200});
 });
 
 
 router.get('/checkSession', function(req, res, next) {
 	console.log("/checkSession");
-	
+
 	res.send({"msg":req.session});
 });
 
@@ -321,7 +306,7 @@ router.get('/getSuccess', function(req, res, next) {
 
 router.get('/getuserDetails', function(req, res, next) {
 	console.log("/getuserDetails new");
-	
+
 	res.send({"status":200,"userDetails":req.session.userDetails});
 });
 
