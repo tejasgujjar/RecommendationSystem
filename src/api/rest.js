@@ -95,6 +95,36 @@ router.get('/getUser', function(req, res, next) {
 	});
 });
 
+router.get('/getRestaurantsForProfileTemp',function(req,res){
+  console.log("inside getRestaurantsForProfileTemp");
+
+  mongoconn.connect(function(_connection){
+    
+    var restaurants = _connection.collection('restaurants');
+    restaurants
+    .find({"id":1})
+    .toArray(function(err,result){
+      if(err){
+        console.log(err);
+        res
+        .status(200)
+        .json({"status":"failed"});
+      }
+      var output = [];
+      console.log(result.length);
+
+      if(result.length != 0){
+      	output.push(result[index]);
+      }
+
+      res
+      .status(200)
+      .json(output);
+    });
+
+  });
+
+});
 
 router.get('/getRestaurantsForProfile',function(req,res){
   console.log("inside getRestaurantsForProfile");
@@ -107,7 +137,7 @@ router.get('/getRestaurantsForProfile',function(req,res){
 		res.send(document);
 	});
 
-  /*mongoconn.connect(function(_connection){
+  mongoconn.connect(function(_connection){
     //lat = 37.3412530
     //long = -121.8949750
     //http://localhost:3000/api/getRestaurantsForProfile?name=yashas&category=mexican&latitude=37.3412530&longitude=-121.8949750
@@ -145,10 +175,7 @@ router.get('/getRestaurantsForProfile',function(req,res){
               break;
             }
           }
-
         }
-
-
       }
 
 
@@ -158,7 +185,7 @@ router.get('/getRestaurantsForProfile',function(req,res){
     });
 
   });
-*/
+
 
 });
 
@@ -228,9 +255,6 @@ router.post('/signupuser', function(req, res, next) {
 
 
              });
-
-
-
 
              }
 
@@ -303,6 +327,7 @@ router.get('/getSuccess', function(req, res, next) {
 		console.log("succsss");
 		res.send({"status":200});
 	},3000);
+});
 
 router.get('/getuserDetails', function(req, res, next) {
 	console.log("/getuserDetails new");
