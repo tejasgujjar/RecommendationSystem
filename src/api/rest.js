@@ -97,6 +97,40 @@ router.get('/getUser', function(req, res, next) {
 });
 
 
+router.get('/getRestaurantsByID',function(req,res){
+  console.log("inside getRestaurantsByID");
+
+  console.log(req.query.id);
+  //var search_obj = JSON.parse(req.query.id);
+
+  mongoconn.connect(function(_connection){
+    
+    var restaurants = _connection.collection('restaurants_dump');
+    restaurants
+    .find({"id":Number(req.query.id)})
+    .toArray(function(err,result){
+      if(err){
+        console.log(err);
+        res
+        .status(200)
+        .json({"status":"failed"});
+      }
+      var output = [];
+      console.log(result.length);
+
+      if(result.length != 0){
+        output.push(result[0]);
+      }
+
+      res
+      .status(200)
+      .json(output);
+    });
+
+  });
+
+});
+
 
 router.get('/getRestaurantsForProfileTemp',function(req,res){
   console.log("inside getRestaurantsForProfileTemp");
