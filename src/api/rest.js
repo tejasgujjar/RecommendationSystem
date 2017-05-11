@@ -163,6 +163,17 @@ router.get('/getRestaurantsForProfileTemp',function(req,res){
 
 });
 
+router.get('/getRestaurantsForProfileNew',function(req,res){
+	console.log("inside getRestaurants for the user");
+
+	console.log(req.session.userDetails);
+
+	res
+        .status(200)
+        .json({"status":"success"});
+
+});
+
 router.get('/getRestaurantsForProfile',function(req,res){
   console.log("inside getRestaurantsForProfile");
   //console.log(req.query);
