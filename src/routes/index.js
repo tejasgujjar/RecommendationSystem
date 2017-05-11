@@ -174,17 +174,28 @@ router.get('/getRestaurantsForProfileTemp',function(req,res){
 
 
 router.get('/api/getRestaurantsForProfile',function(req,res){
-  console.log("inside getRestaurantsForProfile");
-  console.log(req.query);
-  console.log(req.session.userDetails.user_id);
+  console.log("inside getRestaurantsForProfile new");
+
+  console.log(req.session.userDetails);
 
   //if(req.session.userDetails.user_id == 17){
     console.log("Get restaurants for user 17");
 
     mongoconn.connect(function(_connection){
+
+
+        if(req.session.userDetails.user_id == 29) {
+         var arr = [2,11,36,45,65,114,139,168,170,176,195,207,227,247,263]; //mexican
+       } else if (req.session.userDetails.user_id == 31) {
+         var arr = [44,46,49,50,77,78,80,107,117,118,120,121,124,125,126,137];
+       } else {
+         var arr = [12,14,33,35,75,109];
+       }
+
+
         var restaurants = _connection.collection('restaurants_dump');
         restaurants
-        .find({"id":{"$in":[1,2,3,4,5]}})
+        .find({"id":{"$in":arr}})
         .sort({"rating":-1})
         .toArray(function(err,result){
 
