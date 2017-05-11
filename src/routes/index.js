@@ -178,7 +178,7 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
   console.log(req.query);
   console.log(req.session.userDetails.user_id);
 
-  if(req.session.userDetails.user_id == 17){
+  //if(req.session.userDetails.user_id == 17){
     console.log("Get restaurants for user 17");
 
     mongoconn.connect(function(_connection){
@@ -210,10 +210,6 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
 
 
 
-  }
-  else{
-   console.log("Get restaurants for other users"); 
-  }
 
   /*mongoconn.connect(function(_connection){
     //lat = 37.3412530
