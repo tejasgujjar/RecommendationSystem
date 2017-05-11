@@ -59,14 +59,14 @@ router.post('/api/signup', function(req, res) {
 
 router.get('/', function(req, res, next) {
   console.log('Requested home page');
-  res.render('home', { title: 'Restaurant Recommendation System' });
+  res.render('index', { title: 'Restaurant Recommendation System' });
 });
 
 router.post('/api/postReview', function(req, res, next) {
   console.log("inside /api/postReview");
-  
+
   mongoconn.connect(function(_connection){
-        
+
     var restaurants = _connection.collection('restaurants_dump');
     var user_reviews = _connection.collection('user_reviews_test');
     var query_obj = req.body;
@@ -91,7 +91,7 @@ router.post('/api/postReview', function(req, res, next) {
 
       user_reviews.insert(
        {"userid":req.session.userDetails.user_id+"","restid":query_obj.restaurant_id,"ratings":query_obj.rating,"comment":query_obj.review_msg},
-       
+
     function(err2,doc2){
 
 
@@ -124,7 +124,7 @@ router.post('/api/postReview', function(req, res, next) {
 )*/
 
 
-}); 
+});
 
 
 
@@ -132,7 +132,7 @@ router.get('/getRestaurantsForProfileTemp',function(req,res){
   console.log("inside getRestaurantsForProfileTemp");
 
   mongoconn.connect(function(_connection){
-    
+
     var restaurants = _connection.collection('restaurants');
     restaurants
     .find({"id":1})

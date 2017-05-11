@@ -197,7 +197,7 @@ function logout_user(){
     type: 'get', // This is the default though, you don't actually need to always mention it
     success: function(data) {
         //console.log("Recommendation data: "+JSON.stringify(data));
-        window.location.href = URL + "/new-ui";
+        window.location.href = URL ;
     },
     error: function(data) {
       BootstrapDialog.alert({
@@ -212,7 +212,7 @@ function logout_user(){
 
 function load_homepage_ajax(){
   $.ajax({
-    url: URL + '/api/rest/getRestaurantsForProfileTemp',
+    url: URL + '/api/rest/getRestaurantsForProfile',
     type: 'get', // This is the default though, you don't actually need to always mention it
     success: function(data) {
         //console.log("Recommendation data: "+JSON.stringify(data));
