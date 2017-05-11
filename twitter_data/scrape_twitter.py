@@ -1,3 +1,5 @@
+#remove ' and & in the actual tweet
+
 import tweepy
 from tweepy import Stream
 from tweepy.streaming import StreamListener
@@ -37,11 +39,13 @@ def twitter_update(restaurant,state):
     return True
 
 # list of restaurant from the db
-LOOKUP_KEYWORDS = ['pistahouse', "Bibo's Ny Pizza", "Gulzaar Halal Restaurant & catering", "recommendMeRestaurant"] # to be taken from the mongo DB
+LOOKUP_KEYWORDS = ['pistahouse', "Bibo's Ny Pizza", "Gulzaar Halal Restaurant & catering", "Bertucelli's La Villa","The Vape Cafe"] # to be taken from the mongo DB
 
 
 for i in xrange(len(LOOKUP_KEYWORDS)):
     LOOKUP_KEYWORDS[i] = LOOKUP_KEYWORDS[i].replace(" ", "_")
+    LOOKUP_KEYWORDS[i] = LOOKUP_KEYWORDS[i].replace("'", "")
+    LOOKUP_KEYWORDS[i] = LOOKUP_KEYWORDS[i].replace("&_", "")
 
 print("str: "+str(LOOKUP_KEYWORDS))
 
@@ -94,9 +98,14 @@ class MyListener(StreamListener):
                 restaurant = ""
                 print("Sentiment: "+str(sentiment))
                 # get restaurant name from the text
-                for rest in LOOKUP_KEYWORDS:
-                    if rest in tweet:
-                        restaurant = rest
+                print("LOOKUP_KEYWORDS :"+str(LOOKUP_KEYWORDS))
+
+                for i in xrange(len(LOOKUP_KEYWORDS)):
+                    rest = LOOKUP_KEYWORDS[i]
+                    if rest.lower() in tweet.lower():
+                        print("Found rest in LOOKUP ")
+                        restaurant = LOOKUP_KEYWORDS[i]
+
                 print("Restaurant: "+restaurant)
 
                 twitter_update(restaurant, sentiment)
