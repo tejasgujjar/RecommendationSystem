@@ -126,6 +126,16 @@ router.post('/api/postReview', function(req, res, next) {
 
 });
 
+router.get('/getRestaurantsForProfileNew',function(req,res){
+  console.log("inside getRestaurants for the user");
+
+  console.log(req.session.userDetails);
+
+  res
+        .status(200)
+        .json({"status":"success"});
+
+});
 
 
 router.get('/getRestaurantsForProfileTemp',function(req,res){
@@ -166,7 +176,46 @@ router.get('/getRestaurantsForProfileTemp',function(req,res){
 router.get('/api/getRestaurantsForProfile',function(req,res){
   console.log("inside getRestaurantsForProfile");
   console.log(req.query);
-  mongoconn.connect(function(_connection){
+  console.log(req.session.userDetails.user_id);
+
+  if(req.session.userDetails.user_id == 17){
+    console.log("Get restaurants for user 17");
+
+    mongoconn.connect(function(_connection){
+        var restaurants = _connection.collection('restaurants_dump');
+        restaurants
+        .find({"id":{"$in":[1,2,3,4,5]}})
+        .sort({"rating":-1})
+        .toArray(function(err,result){
+
+        if(err){
+                console.log(err);
+                res
+                .status(200)
+              .json({"status":"failed"});
+        }
+        var output = [];
+          for(var index in result){
+            output.push(result[index]);            
+          }
+
+          res
+      .status(200)
+      .json(output);
+
+        });
+
+
+    });
+
+
+
+  }
+  else{
+   console.log("Get restaurants for other users"); 
+  }
+
+  /*mongoconn.connect(function(_connection){
     //lat = 37.3412530
     //long = -121.8949750
     //http://localhost:3000/api/getRestaurantsForProfile?name=yashas&category=mexican&latitude=37.3412530&longitude=-121.8949750
@@ -190,7 +239,7 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
           output.push(result[index]);
           count++;
           if(count == 20) break;
-          /*for (var objIndex in result[index].categories){
+          for (var objIndex in result[index].categories){
             if(result[index].categories[objIndex]['alias'] == req.query['category']){
 
              var dist = geolib.getDistance(
@@ -206,7 +255,7 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
               }
               break;
             }
-          }*/
+          }
 
        }
 
@@ -219,6 +268,7 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
       .json(output);
     });
   });
+  */
 
 
 });
