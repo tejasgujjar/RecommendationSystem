@@ -171,7 +171,7 @@ function check_and_save_review(){
       "rating":rev_rating
     }
     $.ajax({
-      url: URL + '/api/postReview',
+      url: '/api/postReview',
       type: 'post',
       data: post_data,
       success: function(data) {
@@ -193,11 +193,11 @@ function check_and_save_review(){
 function logout_user(){
   console.log("logged out");
   $.ajax({
-    url: URL + '/api/rest/signoutuser',
+    url: '/api/rest/signoutuser',
     type: 'get', // This is the default though, you don't actually need to always mention it
     success: function(data) {
         //console.log("Recommendation data: "+JSON.stringify(data));
-        window.location.href = URL ;
+        window.location.href = "/" ;
     },
     error: function(data) {
       BootstrapDialog.alert({
@@ -212,10 +212,14 @@ function logout_user(){
 
 function load_homepage_ajax(){
   $.ajax({
-    url: URL + '/api/rest/getRestaurantsForProfile',
+    url: '/api/rest/getRestaurantsForProfile',
     type: 'get', // This is the default though, you don't actually need to always mention it
     success: function(data) {
         //console.log("Recommendation data: "+JSON.stringify(data));
+        if (data.status == 403){
+          alert("Not logged in. Please login.");
+          window.location.href = "/home";
+        }
         RECOMMENDATION_DATA = data;
         load_homepage(data);
     },
