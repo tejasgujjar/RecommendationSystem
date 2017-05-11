@@ -207,6 +207,8 @@ router.get('/api/getRestaurantsForProfile',function(req,res){
         }
         var output = [];
           for(var index in result){
+            console.log(result[index].rating);
+            result[index].rating = Math.ceil(result[index].rating*10)/10;
             output.push(result[index]);            
           }
 
