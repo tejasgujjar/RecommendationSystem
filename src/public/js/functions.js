@@ -212,18 +212,21 @@ function logout_user(){
 
 function load_homepage_ajax(){
   $.ajax({
-    url: '/api/rest/getRestaurantsForProfile',
+    // url: '/api/rest/getRestaurantsForProfileTemp',
+    url: '/api/getRestaurantsForProfile',
     type: 'get', // This is the default though, you don't actually need to always mention it
     success: function(data) {
         //console.log("Recommendation data: "+JSON.stringify(data));
         if (data.status == 403){
           alert("Not logged in. Please login.");
-          window.location.href = "/home";
+          window.location.href = "/";
         }
         RECOMMENDATION_DATA = data;
         load_homepage(data);
     },
     error: function(data) {
+        alert("Not logged in. Please login.");
+        window.location.href = "/";
         console.log('Failed to get Recommendation data');
         if(data.status == 409){
             console.log('User already exists');
@@ -235,7 +238,11 @@ function load_homepage_ajax(){
 function get_cuisines(cuisine_list){
   var ret = "";
   for(var i=0;i<cuisine_list.length;i++){
-    ret = ret + ", " + cuisine_list[i].title;
+    if(i==0){
+      ret = cuisine_list[i].title;
+    }else{
+      ret = ret + ", " + cuisine_list[i].title;
+    }
   }
   return ret;
 }

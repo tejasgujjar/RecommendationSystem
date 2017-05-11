@@ -39,7 +39,12 @@ def twitter_update(restaurant,state):
     return True
 
 # list of restaurant from the db
-LOOKUP_KEYWORDS = ['pistahouse', "Bibo's Ny Pizza", "Gulzaar Halal Restaurant & catering", "Bertucelli's La Villa","The Vape Cafe"] # to be taken from the mongo DB
+
+
+LOOKUP_KEYWORDS = ['pistahouse', "Bibo's Ny Pizza", "Gulzaar Halal Restaurant & catering","La Original Paleteria Y Neveria"
+                   "The Vape Cafe","Bertucelli's La Villa","Mavericks Mexican Grill","Metro Balderas 1","Taqueria La Veracruzana",
+                   "El Gallo Giro Taco Truck","Californios","La Chilindrina","Casa De Meza","Los Cabos","Tacos La Perla",
+                   "La Marea of the Sea","Tacos Jalapa","Taqueria Latina","La Bodeguita Del Medio"] # to be taken from the mongo DB
 
 
 for i in xrange(len(LOOKUP_KEYWORDS)):
