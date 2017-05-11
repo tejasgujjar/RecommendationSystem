@@ -151,7 +151,7 @@ function main() {
       });
       getLocation();
   	});
-    
+
 
     function check_user_credential(e,p){
 
@@ -163,13 +163,13 @@ function main() {
       }
 
       $.ajax({
-        url: URL + '/api/rest/signinuser',
+        url: '/api/rest/signinuser',
         type: 'post',
         data: post_data,
         success: function(data) {
             if(data.status == 200){
                 console.log("User logged in successfully: "+data);
-                window.location.href = URL + "/home";
+                window.location.href = "/home";
             }
             else if(data.status == 409){
                 console.log('Invalid password');
@@ -235,7 +235,7 @@ function main() {
     function register_user(post_data){
         console.log("user sign up data: "+JSON.stringify(post_data));
         $.ajax({
-          url: URL + '/api/rest/signupuser',
+          url: '/api/rest/signupuser',
           type: 'post',
           data: post_data,
           success: function(data) {
