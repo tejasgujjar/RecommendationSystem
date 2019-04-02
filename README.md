@@ -26,7 +26,6 @@ Refer: http://mongodb.github.io/node-mongodb-native/2.2/quick-start/quick-start/
 #### Twitter data
 1. Twitter account credentials
 * username: ravindranathtejas
-* password: twr2013
 
 #### Important links
 * Twitter text analysis: https://marcobonzanini.com/2015/03/09/mining-twitter-data-with-python-part-2/
